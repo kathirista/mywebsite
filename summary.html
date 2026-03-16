@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sruthi Korlakunta - Summary & Skills</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --klimt-gold: #B38B36;
+            --klimt-yellow: #D4AF37;
+            --klimt-red: #4A0E17;
+            --klimt-black: #0F0C0C;
+            --klimt-cream: #EFE6D5;
+        }
+        body {
+            font-family: 'Lora', serif;
+            background-color: var(--klimt-black);
+            background-image: 
+                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 160 160'%3E%3Cg fill-opacity='0.07'%3E%3Cpath fill='%23B38B36' d='M0 80 Q 40 0, 80 80 T 160 80 Q 120 160, 80 80 T 0 80 Z'/%3E%3Cpath fill='%234A0E17' d='M80 0 Q 160 40, 80 80 T 80 160 Q 0 120, 80 80 T 80 0 Z'/%3E%3Ccircle cx='80' cy='80' r='25' fill='%23E5C158' fill-opacity='0.04'/%3E%3Ccircle cx='80' cy='80' r='12' fill='%23B38B36' fill-opacity='0.08'/%3E%3Crect x='70' y='70' width='20' height='20' fill='%234A0E17' fill-opacity='0.08' transform='rotate(45 80 80)'/%3E%3C/g%3E%3C/svg%3E"),
+                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400' viewBox='0 0 400 400'%3E%3Cpath d='M 100 100 Q 200 0 300 100 Q 400 200 300 300 Q 200 400 100 300 Q 0 200 100 100 Z' fill='none' stroke='%23D4AF37' stroke-width='1' stroke-opacity='0.15'/%3E%3Cpath d='M 150 150 Q 200 50 250 150 Q 350 200 250 250 Q 200 350 150 250 Q 50 200 150 150 Z' fill='none' stroke='%234A0E17' stroke-width='1' stroke-opacity='0.15'/%3E%3C/svg%3E");
+            color: var(--klimt-black);
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+            font-size: 1.1rem;
+        }
+        
+        h1, h2, h3, h4 {
+            font-family: 'Cinzel Decorative', serif;
+            color: var(--klimt-red);
+            font-weight: 900;
+        }
+
+        .story-p::first-letter {
+            font-family: 'Cinzel Decorative', serif;
+            font-size: 4rem;
+            float: left;
+            margin-right: 12px;
+            margin-bottom: -15px;
+            margin-top: -5px;
+            line-height: 1;
+            color: var(--klimt-red);
+            text-shadow: 2px 2px 0px var(--klimt-cream), 4px 4px 0px var(--klimt-black);
+        }
+        
+        .bento-box {
+            background-color: var(--klimt-cream);
+            border: 4px solid var(--klimt-black);
+            border-radius: 0;
+            position: relative;
+            padding: 2.5rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 8px 8px 0px var(--klimt-gold);
+            z-index: 20;
+        }
+        .bento-box:hover {
+            transform: translate(-4px, -4px);
+            box-shadow: 12px 12px 0px var(--klimt-gold);
+        }
+
+        .klimt-border {
+            position: absolute;
+            top: 4px; left: 4px; right: 4px; bottom: 4px;
+            border: 2px dashed var(--klimt-red);
+            pointer-events: none;
+        }
+        .klimt-border::before, .klimt-border::after {
+            content: '';
+            position: absolute;
+            width: 20px; height: 20px;
+            background-color: var(--klimt-black);
+        }
+        .klimt-border::before {
+            top: -10px; left: -10px;
+            border-radius: 50%;
+        }
+        .klimt-border::after {
+            bottom: -10px; right: -10px;
+            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+            background-color: var(--klimt-gold);
+        }
+
+        .speech-bubble {
+            position: relative;
+            background: #fff;
+            border: 3px solid var(--klimt-black);
+            padding: 1rem;
+            border-radius: 0;
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            color: var(--klimt-red);
+            box-shadow: 4px 4px 0px rgba(15, 12, 12, 0.3);
+            font-family: 'Cinzel Decorative', serif;
+            font-weight: 700;
+        }
+        .speech-bubble::after {
+            content: '';
+            position: absolute;
+            bottom: -15px; left: 20px;
+            border-width: 15px 15px 0 0;
+            border-style: solid;
+            border-color: var(--klimt-black) transparent transparent transparent;
+        }
+        .speech-bubble-inner::after {
+            content: '';
+            position: absolute;
+            bottom: -10px; left: 23px;
+            border-width: 10px 10px 0 0;
+            border-style: solid;
+            border-color: #fff transparent transparent transparent;
+            z-index: 10;
+        }
+        .gemma-label {
+            display: block;
+            font-family: 'Cinzel Decorative', serif;
+            font-weight: 900;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            color: var(--klimt-black);
+            margin-bottom: 0.5rem;
+            border-bottom: 1px solid var(--klimt-red);
+            padding-bottom: 2px;
+        }
+
+        .tree-container {
+            position: relative;
+            width: 100%;
+            height: 600px;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: var(--klimt-black);
+            border: 4px solid var(--klimt-red);
+        }
+        .tree-node {
+            position: absolute;
+            background: var(--klimt-cream);
+            border: 2px solid var(--klimt-red);
+            padding: 8px 16px;
+            font-family: 'Cinzel Decorative', serif;
+            font-weight: 700;
+            font-size: 1rem;
+            color: var(--klimt-black);
+            transition: all 0.3s ease;
+            cursor: default;
+            box-shadow: 4px 4px 0px var(--klimt-red);
+            z-index: 2;
+        }
+        .tree-node:hover {
+            transform: scale(1.1) rotate(-3deg);
+            background: var(--klimt-gold);
+            color: var(--klimt-red);
+        }
+
+        .link-hover {
+            color: var(--klimt-black);
+            text-decoration: none;
+            transition: all 0.2s ease;
+            font-family: 'Cinzel Decorative', serif;
+            text-transform: uppercase;
+            font-weight: 700;
+        }
+        .link-hover:hover {
+            color: var(--klimt-red);
+        }
+        .active-link {
+            color: var(--klimt-red);
+            border-bottom: 2px solid var(--klimt-red);
+        }
+
+        /* Dancing Stick Figures Animations (Limb-based) */
+        .dancing-bg {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            pointer-events: none;
+            z-index: 10;
+            opacity: 0.6;
+        }
+        
+        @keyframes flyOutCurve {
+            0% { transform: translate(0, 0) scale(1) rotate(0deg); opacity: 1; filter: drop-shadow(0 0 8px currentColor); }
+            100% { transform: translate(150vw, -150vh) scale(5) rotate(180deg); opacity: 0; filter: drop-shadow(0 0 30px currentColor); }
+        }
+
+        .dancer {
+            position: absolute;
+            width: 50px; height: 75px;
+            pointer-events: auto;
+            transition: filter 0.3s;
+        }
+        .dancer:hover {
+            animation: flyOutCurve 1.5s cubic-bezier(0.25, 1, 0.5, 1) forwards !important;
+            z-index: 100;
+        }
+        .dancer:hover .arm-l { animation: waveArmL 0.4s infinite alternate ease-in-out; }
+        .dancer:hover .arm-r { animation: waveArmR 0.4s infinite alternate ease-in-out; }
+        .dancer:hover .leg-l { animation: kickLegL 0.4s infinite alternate ease-in-out; }
+        .dancer:hover .leg-r { animation: kickLegR 0.4s infinite alternate ease-in-out; }
+        .dancer:hover .head { animation: bopHead 0.4s infinite alternate ease-in-out; }
+
+        @keyframes waveArmL { to { transform: rotate(45deg); } }
+        @keyframes waveArmR { to { transform: rotate(-45deg); } }
+        @keyframes kickLegL { to { transform: rotate(30deg); } }
+        @keyframes kickLegR { to { transform: rotate(-30deg); } }
+        @keyframes bopHead { to { transform: translate(2px, 3px); } }
+
+    </style>
+</head>
+<body class="p-6 md:p-12 flex flex-col min-h-screen">
+
+    <!-- SVG Definitions for Stick Figures -->
+    <svg width="0" height="0" style="position: absolute;">
+        <defs>
+            <g id="pose-1">
+                <circle cx="20" cy="10" r="4" class="head" fill="currentColor" stroke="none" />
+                <line x1="20" y1="14" x2="20" y2="35" class="body" stroke="currentColor" />
+                <path d="M20,20 L10,30" class="arm-l" stroke="currentColor" style="transform-origin: 20px 20px;" />
+                <path d="M20,20 L30,30" class="arm-r" stroke="currentColor" style="transform-origin: 20px 20px;" />
+                <path d="M20,35 L10,55" class="leg-l" stroke="currentColor" style="transform-origin: 20px 35px;" />
+                <path d="M20,35 L30,55" class="leg-r" stroke="currentColor" style="transform-origin: 20px 35px;" />
+            </g>
+            <g id="pose-2">
+                <circle cx="20" cy="10" r="4" class="head" fill="currentColor" stroke="none" />
+                <line x1="20" y1="14" x2="20" y2="35" class="body" stroke="currentColor" />
+                <path d="M20,20 L10,10" class="arm-l" stroke="currentColor" style="transform-origin: 20px 20px;" />
+                <path d="M20,20 L30,30" class="arm-r" stroke="currentColor" style="transform-origin: 20px 20px;" />
+                <path d="M20,35 L10,50" class="leg-l" stroke="currentColor" style="transform-origin: 20px 35px;" />
+                <path d="M20,35 L30,55" class="leg-r" stroke="currentColor" style="transform-origin: 20px 35px;" />
+            </g>
+            <g id="pose-3">
+                <circle cx="20" cy="10" r="4" class="head" fill="currentColor" stroke="none" />
+                <line x1="20" y1="14" x2="20" y2="35" class="body" stroke="currentColor" />
+                <path d="M20,20 L10,10" class="arm-l" stroke="currentColor" style="transform-origin: 20px 20px;" />
+                <path d="M20,20 L30,10" class="arm-r" stroke="currentColor" style="transform-origin: 20px 20px;" />
+                <path d="M20,35 L15,55" class="leg-l" stroke="currentColor" style="transform-origin: 20px 35px;" />
+                <path d="M20,35 L25,55" class="leg-r" stroke="currentColor" style="transform-origin: 20px 35px;" />
+            </g>
+            <g id="pose-4">
+                <circle cx="20" cy="10" r="4" class="head" fill="currentColor" stroke="none" />
+                <line x1="20" y1="14" x2="20" y2="35" class="body" stroke="currentColor" />
+                <path d="M20,20 L5,20" class="arm-l" stroke="currentColor" style="transform-origin: 20px 20px;" />
+                <path d="M20,20 L35,20" class="arm-r" stroke="currentColor" style="transform-origin: 20px 20px;" />
+                <path d="M20,35 L5,45" class="leg-l" stroke="currentColor" style="transform-origin: 20px 35px;" />
+                <path d="M20,35 L35,45" class="leg-r" stroke="currentColor" style="transform-origin: 20px 35px;" />
+            </g>
+        </defs>
+    </svg>
+
+    <div class="dancing-bg">
+        <!-- 25 Figures -->
+        <svg class="dancer" style="top: 5%; left: 10%; transform: rotate(15deg) scale(1.1); color: var(--klimt-gold);" viewBox="0 0 40 60" stroke-width="2" fill="none" stroke-linecap="round"><use href="#pose-1"/></svg>
+        <svg class="dancer" style="top: 15%; left: 85%; transform: rotate(-10deg); color: var(--klimt-yellow);" viewBox="0 0 40 60" stroke-width="2" fill="none" stroke-linecap="round"><use href="#pose-2"/></svg>
+        <svg class="dancer" style="top: 40%; left: 5%; transform: rotate(25deg); color: var(--klimt-red);" viewBox="0 0 40 60" stroke-width="2" fill="none" stroke-linecap="round"><use href="#pose-3"/></svg>
+        <svg class="dancer" style="top: 75%; left: 15%; transform: rotate(-20deg) scale(1.2); color: var(--klimt-gold);" viewBox="0 0 40 60" stroke-width="2" fill="none" stroke-linecap="round"><use href="#pose-4"/></svg>
+        <svg class="dancer" style="top: 60%; left: 90%; transform: rotate(5deg); color: var(--klimt-yellow);" viewBox="0 0 40 60" stroke-width="2" fill="none" stroke-linecap="round"><use href="#pose-1"/></svg>
+        <svg class="dancer" style="top: 85%; left: 45%; transform: rotate(-15deg); color: var(--klimt-red);" viewBox="0 0 40 60" stroke-width="2" fill="none" stroke-linecap="round"><use href="#pose-2"/></svg>
+        <svg class="dancer" style="top: 25%; left: 65%; transform: rotate(35deg) scale(0.9); color: var(--klimt-gold);" viewBox="0 0 40 60" stroke-width="2" fill="none" stroke-linecap="round"><use href="#pose-3"/></svg>
+        <svg class="dancer" style="top: 45%; left: 35%; transform: rotate(-35deg); color: var(--klimt-red);" viewBox="0 0 40 60" stroke-width="2" fill="none" stroke-linecap="round"><use href="#pose-4"/></svg>
+        <svg class="dancer" style="top: 30%; left: 25%; transform: rotate(45deg); color: var(--klimt-yellow);" viewBox="0 0 40 60" stroke-width="2" fill="none" stroke-linecap="round"><use href="#pose-1"/></svg>
+        <svg class="dancer" style="top: 10%; left: 45%; transform: rotate(5deg) scale(1.15); color: var(--klimt-gold);" viewBox="0 0 40 60" stroke-width="2" fill="none" stroke-linecap="round"><use href="#pose-2"/></svg>
+        <svg class="dancer" style="top: 90%; left: 10%; transform: rotate(-5deg); color: var(--klimt-yellow);" viewBox="0 0 40 60" stroke-width="2" fill="none" stroke-linecap="round"><use href="#pose-3"/></svg>
+        <svg class="dancer" style="top: 55%; left: 70%; transform: rotate(12deg); color: var(--klimt-red);" viewBox="0 0 40 60" stroke-width="2" fill="none" stroke-linecap="round"><use href="#pose-4"/></svg>
+        <svg class="dancer" style="top: 70%; left: 35%; transform: rotate(-18deg) scale(1.05); color: var(--klimt-gold);" viewBox="0 0 40 60" stroke-width="2" fill="none" stroke-linecap="round"><use href="#pose-1"/></svg>
+        <svg class="dancer" style="top: 85%; left: 75%; transform: rotate(8deg); color: var(--klimt-yellow);" viewBox="0 0 40 60" stroke-width="2" fill="none" stroke-linecap="round"><use href="#pose-2"/></svg>
+        <svg class="dancer" style="top: 20%; left: 40%; transform: rotate(-25deg); color: var(--klimt-red);" viewBox="0 0 40 60" stroke-width="2" fill="none" stroke-linecap="round"><use href="#pose-3"/></svg>
+        
+        <svg class="dancer" style="top: 12%; left: 25%; transform: rotate(40deg); color: var(--klimt-gold);" viewBox="0 0 40 60" stroke-width="2" fill="none" stroke-linecap="round"><use href="#pose-4"/></svg>
+        <svg class="dancer" style="top: 35%; left: 55%; transform: rotate(-5deg) scale(0.95); color: var(--klimt-yellow);" viewBox="0 0 40 60" stroke-width="2" fill="none" stroke-linecap="round"><use href="#pose-1"/></svg>
+        <svg class="dancer" style="top: 55%; left: 20%; transform: rotate(18deg); color: var(--klimt-red);" viewBox="0 0 40 60" stroke-width="2" fill="none" stroke-linecap="round"><use href="#pose-2"/></svg>
+        <svg class="dancer" style="top: 80%; left: 30%; transform: rotate(-30deg); color: var(--klimt-gold);" viewBox="0 0 40 60" stroke-width="2" fill="none" stroke-linecap="round"><use href="#pose-3"/></svg>
+        <svg class="dancer" style="top: 95%; left: 60%; transform: rotate(10deg) scale(1.1); color: var(--klimt-yellow);" viewBox="0 0 40 60" stroke-width="2" fill="none" stroke-linecap="round"><use href="#pose-4"/></svg>
+        <svg class="dancer" style="top: 65%; left: 50%; transform: rotate(-12deg); color: var(--klimt-red);" viewBox="0 0 40 60" stroke-width="2" fill="none" stroke-linecap="round"><use href="#pose-1"/></svg>
+        <svg class="dancer" style="top: 45%; left: 85%; transform: rotate(22deg); color: var(--klimt-gold);" viewBox="0 0 40 60" stroke-width="2" fill="none" stroke-linecap="round"><use href="#pose-2"/></svg>
+        <svg class="dancer" style="top: 25%; left: 45%; transform: rotate(-8deg) scale(1.2); color: var(--klimt-yellow);" viewBox="0 0 40 60" stroke-width="2" fill="none" stroke-linecap="round"><use href="#pose-3"/></svg>
+        <svg class="dancer" style="top: 5%; left: 70%; transform: rotate(30deg); color: var(--klimt-red);" viewBox="0 0 40 60" stroke-width="2" fill="none" stroke-linecap="round"><use href="#pose-4"/></svg>
+        <svg class="dancer" style="top: 50%; left: 10%; transform: rotate(-25deg); color: var(--klimt-gold);" viewBox="0 0 40 60" stroke-width="2" fill="none" stroke-linecap="round"><use href="#pose-1"/></svg>
+    </div>
+
+    <nav class="flex justify-between items-center mb-12 z-20 relative max-w-7xl mx-auto bg-[var(--klimt-cream)] border-4 border-[var(--klimt-black)] p-4 shadow-[6px_6px_0px_var(--klimt-gold)] w-full">
+        <h1 class="text-3xl lg:text-4xl font-black tracking-wider m-0 text-[var(--klimt-red)]">Sruthi Korlakunta</h1>
+        <div class="space-x-6 text-xl">
+            <a href="index.html" class="link-hover">Home</a>
+            <a href="summary.html" class="link-hover active-link">Summary</a>
+            <a href="blog.html" class="link-hover">Blog</a>
+            <a href="contact.html" class="link-hover">Contact</a>
+        </div>
+    </nav>
+
+    <main class="grid grid-cols-1 md:grid-cols-12 gap-8 max-w-7xl mx-auto z-20 relative w-full items-stretch flex-grow mb-12">
+        
+        <div class="bento-box md:col-span-12">
+            <div class="klimt-border"></div>
+            <div class="speech-bubble speech-bubble-inner">
+                <span class="gemma-label">Gemma says:</span>
+                She processes data AND philosophises why. From orchestrating AWS pipelines for automotive giants to researching Computer Vision—her background is as dense as a 19th-century novel but far more practical.
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
+                <div>
+                    <h2 class="text-3xl mb-6 text-[var(--klimt-red)]">The Professional Lore</h2>
+                    <p class="story-p mb-4 leading-relaxed">
+                        With over 8 years in the automotive industry (BMW, Audi, VW), Sruthi is a Data Engineer and Process Automation Lead specializing in the vital link between raw telemetry and production-ready insights. She engineers highly scalable, cloud-native pipelines (AWS Athena, Lambda, Glue) capable of digesting massive sensor datasets.
+                    </p>
+                    <p class="mb-4 leading-relaxed">
+                        A perpetual learner with a Master's in Information & Automation Engineering from the University of Bremen, Germany, she has a robust foundation in AI research, specifically optimizing networks for autonomous vehicles without sacrificing critical edge-case safety.
+                    </p>
+                    <p class="leading-relaxed">
+                        Beyond the code, she's an advocate for LLM-augmented engineering, natively integrating Claude, Gemini, and GitHub Copilot into elegant workflow architectures.
+                    </p>
+                </div>
+                
+                <div class="bg-[var(--klimt-gold)] p-6 border-2 border-[var(--klimt-black)] shadow-[4px_4px_0px_var(--klimt-red)] relative">
+                    <h2 class="text-3xl mb-6 text-[var(--klimt-red)]">Core Disciplines</h2>
+                    <ul class="space-y-6">
+                        <li class="flex items-start">
+                            <span class="text-[var(--klimt-red)] mr-3 text-2xl font-['Cinzel_Decorative']">♦</span>
+                            <div>
+                                <strong class="text-[var(--klimt-black)] block text-xl font-bold font-['Cinzel_Decorative'] tracking-wider">Data Engineering & Cloud</strong>
+                                <span class="text-[var(--klimt-red)] font-bold">AWS (Athena, Lambda), Python, SQL, ETL Automation</span>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-[var(--klimt-red)] mr-3 text-2xl font-['Cinzel_Decorative']">♦</span>
+                            <div>
+                                <strong class="text-[var(--klimt-black)] block text-xl font-bold font-['Cinzel_Decorative'] tracking-wider">Artificial Intelligence & CV</strong>
+                                <span class="text-[var(--klimt-red)] font-bold">Generative Adversarial Networks (GANs), CNNs, Network Pruning, PySpark</span>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-[var(--klimt-red)] mr-3 text-2xl font-['Cinzel_Decorative']">♦</span>
+                            <div>
+                                <strong class="text-[var(--klimt-black)] block text-xl font-bold font-['Cinzel_Decorative'] tracking-wider">Process Automation</strong>
+                                <span class="text-[var(--klimt-red)] font-bold">UI Path, PowerApps, SAP ERP integration</span>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-[var(--klimt-red)] mr-3 text-2xl font-['Cinzel_Decorative']">♦</span>
+                            <div>
+                                <strong class="text-[var(--klimt-black)] block text-xl font-bold font-['Cinzel_Decorative'] tracking-wider">Applied LLM Engineering</strong>
+                                <span class="text-[var(--klimt-red)] font-bold">Claude Code, LangGraph, Google AI Studio, Custom API wrappers</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="bento-box md:col-span-12">
+            <div class="klimt-border"></div>
+            <div class="speech-bubble speech-bubble-inner">
+                <span class="gemma-label">Gemma says:</span>
+                Behold her 'Tree of Knowledge'. It’s inspired by Gustav Klimt’s Tree of Life, because standard bullet points are painfully dull, and she clearly has a flair for the dramatic.
+            </div>
+            
+            <h2 class="text-3xl mb-6 text-center text-[var(--klimt-red)]">Tree of Knowledge</h2>
+            
+            <div class="tree-container">
+                <svg width="100%" height="100%" viewBox="0 0 800 600" preserveAspectRatio="xMidYMid slice" class="absolute inset-0 z-0">
+                    <path d="M400 600 C 400 400, 400 300, 400 200" stroke="var(--klimt-yellow)" stroke-width="12" fill="none"/>
+                    <path d="M400 450 C 300 400, 200 300, 150 250" stroke="var(--klimt-gold)" stroke-width="8" fill="none"/>
+                    <path d="M400 350 C 500 300, 600 250, 650 150" stroke="var(--klimt-gold)" stroke-width="8" fill="none"/>
+                    <path d="M400 250 C 350 200, 250 150, 200 100" stroke="var(--klimt-yellow)" stroke-width="6" fill="none"/>
+                    <path d="M400 200 C 450 150, 550 100, 600 50" stroke="var(--klimt-yellow)" stroke-width="6" fill="none"/>
+                    <path d="M150 250 C 100 200, 50 150, 80 100" stroke="var(--klimt-red)" stroke-width="4" fill="none"/>
+                    <path d="M650 150 C 700 100, 750 100, 720 50" stroke="var(--klimt-red)" stroke-width="4" fill="none"/>
+                    <path d="M200 300 C 180 280, 220 260, 200 240 C 180 220, 160 240, 180 260" stroke="var(--klimt-gold)" stroke-width="4" fill="none"/>
+                    <path d="M500 300 C 520 280, 480 260, 500 240 C 520 220, 540 240, 520 260" stroke="var(--klimt-gold)" stroke-width="4" fill="none"/>
+                    <rect x="180" y="240" width="15" height="15" fill="var(--klimt-red)" transform="rotate(45 187 247)"/>
+                    <circle cx="500" cy="240" r="10" fill="var(--klimt-cream)"/>
+                    <polygon points="650,150 640,130 660,130" fill="var(--klimt-gold)"/>
+                    <rect x="390" y="300" width="20" height="20" fill="var(--klimt-red)"/>
+                    <rect x="395" y="305" width="10" height="10" fill="var(--klimt-cream)"/>
+                </svg>
+
+                <div class="tree-node" style="bottom: 50px; left: 50%; transform: translateX(-50%);">Python</div>
+                <div class="tree-node" style="bottom: 120px; left: 40%;">SQL</div>
+                <div class="tree-node" style="bottom: 160px; right: 40%;">AWS Ecosystem</div>
+                <div class="tree-node" style="bottom: 250px; left: 25%;">Machine Learning</div>
+                <div class="tree-node" style="bottom: 300px; right: 25%;">Data Pipelines</div>
+                <div class="tree-node" style="bottom: 380px; left: 15%;">Computer Vision</div>
+                <div class="tree-node" style="bottom: 420px; right: 18%;">PySpark</div>
+                <div class="tree-node" style="top: 100px; left: 22%;">Philosophy & Writing</div>
+                <div class="tree-node" style="top: 80px; right: 20%;">Applied LLMs (Claude/Gemini)</div>
+                <div class="tree-node" style="top: 30px; left: 50%; transform: translateX(-50%);">Generative AI</div>
+            </div>
+        </div>
+    </main>
+
+</body>
+</html>
