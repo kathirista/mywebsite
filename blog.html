@@ -40,10 +40,15 @@
             border: 4px solid var(--klimt-black);
             border-radius: 0;
             position: relative;
-            padding: 2.5rem;
+            padding: 1.5rem;
             box-shadow: 8px 8px 0px var(--klimt-gold);
             z-index: 20;
             margin-bottom: 2rem;
+        }
+        @media (min-width: 768px) {
+            .bento-box {
+                padding: 2.5rem;
+            }
         }
 
         .klimt-border {
@@ -107,7 +112,6 @@
             transition: filter 0.3s;
         }
         .dancer:hover {
-            animation: flyOutCurve 1.5s cubic-bezier(0.25, 1, 0.5, 1) forwards !important;
             z-index: 100;
         }
         .dancer:hover .arm-l { animation: waveArmL 0.4s infinite alternate ease-in-out; }
@@ -170,7 +174,7 @@
         }
     </style>
 </head>
-<body class="p-6 md:p-12 flex flex-col min-h-screen">
+<body class="p-4 md:p-12 flex flex-col min-h-screen">
 
     <!-- SVG Definitions for Stick Figures -->
     <svg width="0" height="0" style="position: absolute;">
@@ -238,9 +242,9 @@
         <svg class="dancer" style="top: 50%; left: 10%; transform: rotate(-25deg); color: var(--klimt-gold);" viewBox="0 0 40 60" stroke-width="2" fill="none" stroke-linecap="round"><use href="#pose-1"/></svg>
     </div>
 
-    <nav class="flex justify-between items-center mb-12 z-20 relative max-w-7xl mx-auto bg-[var(--klimt-cream)] border-4 border-[var(--klimt-black)] p-4 shadow-[6px_6px_0px_var(--klimt-gold)] w-full">
-        <h1 class="text-3xl lg:text-4xl font-black tracking-wider m-0 text-[var(--klimt-red)]">Sruthi Korlakunta</h1>
-        <div class="space-x-6 text-xl">
+    <nav class="flex flex-col md:flex-row justify-between items-center mb-8 md:mb-12 z-20 relative max-w-7xl mx-auto bg-[var(--klimt-cream)] border-4 border-[var(--klimt-black)] p-4 shadow-[6px_6px_0px_var(--klimt-gold)] w-full gap-4">
+        <h1 class="text-2xl md:text-3xl lg:text-4xl font-black tracking-wider m-0 text-[var(--klimt-red)] text-center">Sruthi Korlakunta</h1>
+        <div class="flex flex-wrap justify-center gap-4 md:space-x-6 md:gap-0 text-base md:text-xl">
             <a href="index.html" class="link-hover">Home</a>
             <a href="summary.html" class="link-hover">Summary</a>
             <a href="blog.html" class="link-hover active-link">Blog</a>
@@ -415,6 +419,15 @@
             wrapper.addEventListener('mouseleave', () => {
                 card.style.transform = `rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
                 card.style.boxShadow = `6px 6px 0px var(--klimt-gold)`;
+            });
+        });
+    </script>
+
+    <script>
+        // Mobile touch support for dancers
+        document.querySelectorAll('.dancer').forEach(dancer => {
+            dancer.addEventListener('touchstart', (e) => {
+                dancer.style.zIndex = '100';
             });
         });
     </script>
