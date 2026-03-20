@@ -9,7 +9,7 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],  # This is the "Master Key" that fixes the error
     allow_credentials=True,
-   # allow_methods=["*"],
+    allow_methods=["*"],
     allow_headers=["*"],
 )
 
