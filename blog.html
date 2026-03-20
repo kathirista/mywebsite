@@ -7,388 +7,278 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poiret+One&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <style>
         :root {
-            --klimt-gold: #B38B36;
-            --klimt-yellow: #D4AF37;
-            --klimt-red: #4A0E17;
-            --klimt-black: #0F0C0C;
-            --klimt-cream: #EFE6D5;
+            --bg-cream: #F8F4EF;
+            --text-black: #110F0D;
+            --accent-cyan: #3C9DB8;
+            --accent-rust: #965D37;
+            --glass-bg: rgba(248, 244, 239, 0.7);
+            --glass-border: rgba(255, 255, 255, 0.5);
         }
+        
         body {
-            font-family: 'Lora', serif;
-            background-color: var(--klimt-black);
-            background-image: 
-                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 160 160'%3E%3Cg fill-opacity='0.07'%3E%3Cpath fill='%23B38B36' d='M0 80 Q 40 0, 80 80 T 160 80 Q 120 160, 80 80 T 0 80 Z'/%3E%3Cpath fill='%234A0E17' d='M80 0 Q 160 40, 80 80 T 80 160 Q 0 120, 80 80 T 80 0 Z'/%3E%3Ccircle cx='80' cy='80' r='25' fill='%23E5C158' fill-opacity='0.04'/%3E%3Ccircle cx='80' cy='80' r='12' fill='%23B38B36' fill-opacity='0.08'/%3E%3Crect x='70' y='70' width='20' height='20' fill='%234A0E17' fill-opacity='0.08' transform='rotate(45 80 80)'/%3E%3C/g%3E%3C/svg%3E"),
-                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400' viewBox='0 0 400 400'%3E%3Cpath d='M 100 100 Q 200 0 300 100 Q 400 200 300 300 Q 200 400 100 300 Q 0 200 100 100 Z' fill='none' stroke='%23D4AF37' stroke-width='1' stroke-opacity='0.15'/%3E%3Cpath d='M 150 150 Q 200 50 250 150 Q 350 200 250 250 Q 200 350 150 250 Q 50 200 150 150 Z' fill='none' stroke='%234A0E17' stroke-width='1' stroke-opacity='0.15'/%3E%3C/svg%3E");
-            color: var(--klimt-black);
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-cream);
+            color: var(--text-black);
             min-height: 100vh;
             position: relative;
             overflow-x: hidden;
-            font-size: 1.1rem;
-        }
-        
-        h1, h2, h3, h4 {
-            font-family: 'Cinzel Decorative', serif;
-            color: var(--klimt-red);
-            font-weight: 900;
-        }
-        
-        .bento-box {
-            background-color: var(--klimt-cream);
-            border: 4px solid var(--klimt-black);
-            border-radius: 0;
-            position: relative;
-            padding: 1.5rem;
-            box-shadow: 8px 8px 0px var(--klimt-gold);
-            z-index: 20;
-            margin-bottom: 2rem;
-        }
-        @media (min-width: 768px) {
-            .bento-box {
-                padding: 2.5rem;
-            }
+            font-size: 1.05rem;
+            line-height: 1.6;
+            margin: 0;
         }
 
-        .klimt-border {
-            position: absolute;
-            top: 4px; left: 4px; right: 4px; bottom: 4px;
-            border: 2px dashed var(--klimt-red);
-            pointer-events: none;
-        }
-        .klimt-border::before, .klimt-border::after {
-            content: '';
-            position: absolute;
-            width: 20px; height: 20px;
-            background-color: var(--klimt-black);
-        }
-        .klimt-border::before {
-            top: -10px; left: -10px;
-            border-radius: 50%;
-        }
-        .klimt-border::after {
-            bottom: -10px; right: -10px;
-            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
-            background-color: var(--klimt-gold);
-        }
-
-        .link-hover {
-            color: var(--klimt-black);
-            text-decoration: none;
-            transition: all 0.2s ease;
-            font-family: 'Cinzel Decorative', serif;
-            text-transform: uppercase;
-            font-weight: 700;
-        }
-        .link-hover:hover {
-            color: var(--klimt-red);
-        }
-        .active-link {
-            color: var(--klimt-red);
-            border-bottom: 2px solid var(--klimt-red);
-        }
-
-        /* ---------------------------------------------------
-           Dancing Stick Figures Animations
-           --------------------------------------------------- */
-        .dancing-bg {
+        body::before {
+            content: "";
             position: fixed;
-            top: 0; left: 0; right: 0; bottom: 0;
+            top: 0; left: 0; width: 100%; height: 100%;
             pointer-events: none;
-            z-index: 10;
+            z-index: 9999;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
             opacity: 0.6;
         }
-        
-        @keyframes flyOutCurve {
-            0% { transform: translate(0, 0) scale(1) rotate(0deg); opacity: 1; filter: drop-shadow(0 0 8px currentColor); }
-            100% { transform: translate(150vw, -150vh) scale(5) rotate(180deg); opacity: 0; filter: drop-shadow(0 0 30px currentColor); }
+
+        h1, h2, h3, h4 {
+            font-family: 'Poiret One', cursive;
+            font-weight: 600;
+            color: var(--text-black);
+            letter-spacing: -0.02em;
         }
 
-        .dancer {
-            position: absolute;
-            width: 50px; height: 75px;
-            pointer-events: auto;
-            transition: filter 0.3s;
+        .font-serif-custom {
+            font-family: 'Poiret One', cursive;
         }
-        .dancer:hover {
+
+        .glass-nav {
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--glass-border);
+            position: sticky;
+            top: 0;
             z-index: 100;
         }
-        .dancer:hover .arm-l { animation: waveArmL 0.4s infinite alternate ease-in-out; }
-        .dancer:hover .arm-r { animation: waveArmR 0.4s infinite alternate ease-in-out; }
-        .dancer:hover .leg-l { animation: kickLegL 0.4s infinite alternate ease-in-out; }
-        .dancer:hover .leg-r { animation: kickLegR 0.4s infinite alternate ease-in-out; }
-        .dancer:hover .head { animation: bopHead 0.4s infinite alternate ease-in-out; }
 
-        @keyframes waveArmL { to { transform: rotate(45deg); } }
-        @keyframes waveArmR { to { transform: rotate(-45deg); } }
-        @keyframes kickLegL { to { transform: rotate(30deg); } }
-        @keyframes kickLegR { to { transform: rotate(-30deg); } }
-        @keyframes bopHead { to { transform: translate(2px, 3px); } }
-
-        /* 3D Dynamic Card Styling */
-        .card-wrapper {
-            perspective: 1200px;
-            height: 100%;
-            display: block;
+        .glass-card {
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            border-radius: 24px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.03);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            overflow: hidden;
         }
-        .card-3d {
-            background-color: #fff;
-            border: 4px solid var(--klimt-black);
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            transform-style: preserve-3d;
-            transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
-            box-shadow: 6px 6px 0px var(--klimt-gold);
+        .glass-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.06);
+        }
+
+        .text-cyan { color: var(--accent-cyan); }
+        .text-rust { color: var(--accent-rust); }
+
+        .link-hover {
+            color: var(--text-black);
+            text-decoration: none;
+            transition: color 0.3s ease;
             position: relative;
-            cursor: pointer;
+            font-weight: 500;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
         }
-        .card-3d::after {
+        .link-hover::after {
             content: '';
             position: absolute;
-            top: 4px; left: 4px; right: 4px; bottom: 4px;
-            border: 1px dashed var(--klimt-red);
-            pointer-events: none;
-            transform: translateZ(10px);
+            width: 0;
+            height: 1px;
+            bottom: -4px;
+            left: 0;
+            background-color: var(--accent-cyan);
+            transition: width 0.3s ease;
         }
-        .card-image-container {
-            height: 200px;
+        .link-hover:hover::after, .active-link::after {
+            width: 100%;
+        }
+        .active-link {
+            color: var(--accent-cyan);
+        }
+
+        .blob {
+            position: absolute;
+            filter: blur(100px);
+            z-index: -1;
+            opacity: 0.3;
+            animation: moveBlob 25s infinite alternate ease-in-out;
+            border-radius: 50%;
+        }
+        .blob-1 { top: -20%; right: -10%; width: 60vw; height: 60vw; background: var(--accent-cyan); }
+        .blob-2 { bottom: 0%; left: -20%; width: 50vw; height: 50vw; background: var(--accent-rust); }
+
+        @keyframes moveBlob {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(-10%, 10%) scale(1.1); }
+        }
+
+        .gsap-reveal {
+            opacity: 0;
+            transform: translateY(40px);
+        }
+
+        .article-card {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            cursor: pointer;
+        }
+        
+        .article-image-container {
+            height: 240px;
             overflow: hidden;
-            border-bottom: 4px solid var(--klimt-black);
-            transform: translateZ(20px);
+            position: relative;
         }
-        .card-3d img {
+        
+        .article-image-container img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            filter: sepia(0.2) contrast(1.1);
+            transition: transform 0.7s ease;
         }
-        .card-content {
-            padding: 1.5rem;
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-            transform: translateZ(30px);
-            background-color: var(--klimt-cream);
+
+        .article-card:hover .article-image-container img {
+            transform: scale(1.05);
         }
     </style>
 </head>
-<body class="p-4 md:p-12 flex flex-col min-h-screen">
+<body>
 
-    <!-- SVG Definitions for Stick Figures -->
-    <svg width="0" height="0" style="position: absolute;">
-        <defs>
-            <g id="pose-1">
-                <circle cx="20" cy="10" r="4" class="head" fill="currentColor" stroke="none" />
-                <line x1="20" y1="14" x2="20" y2="35" class="body" stroke="currentColor" />
-                <path d="M20,20 L10,30" class="arm-l" stroke="currentColor" style="transform-origin: 20px 20px;" />
-                <path d="M20,20 L30,30" class="arm-r" stroke="currentColor" style="transform-origin: 20px 20px;" />
-                <path d="M20,35 L10,55" class="leg-l" stroke="currentColor" style="transform-origin: 20px 35px;" />
-                <path d="M20,35 L30,55" class="leg-r" stroke="currentColor" style="transform-origin: 20px 35px;" />
-            </g>
-            <g id="pose-2">
-                <circle cx="20" cy="10" r="4" class="head" fill="currentColor" stroke="none" />
-                <line x1="20" y1="14" x2="20" y2="35" class="body" stroke="currentColor" />
-                <path d="M20,20 L10,10" class="arm-l" stroke="currentColor" style="transform-origin: 20px 20px;" />
-                <path d="M20,20 L30,30" class="arm-r" stroke="currentColor" style="transform-origin: 20px 20px;" />
-                <path d="M20,35 L10,50" class="leg-l" stroke="currentColor" style="transform-origin: 20px 35px;" />
-                <path d="M20,35 L30,55" class="leg-r" stroke="currentColor" style="transform-origin: 20px 35px;" />
-            </g>
-            <g id="pose-3">
-                <circle cx="20" cy="10" r="4" class="head" fill="currentColor" stroke="none" />
-                <line x1="20" y1="14" x2="20" y2="35" class="body" stroke="currentColor" />
-                <path d="M20,20 L10,10" class="arm-l" stroke="currentColor" style="transform-origin: 20px 20px;" />
-                <path d="M20,20 L30,10" class="arm-r" stroke="currentColor" style="transform-origin: 20px 20px;" />
-                <path d="M20,35 L15,55" class="leg-l" stroke="currentColor" style="transform-origin: 20px 35px;" />
-                <path d="M20,35 L25,55" class="leg-r" stroke="currentColor" style="transform-origin: 20px 35px;" />
-            </g>
-            <g id="pose-4">
-                <circle cx="20" cy="10" r="4" class="head" fill="currentColor" stroke="none" />
-                <line x1="20" y1="14" x2="20" y2="35" class="body" stroke="currentColor" />
-                <path d="M20,20 L5,20" class="arm-l" stroke="currentColor" style="transform-origin: 20px 20px;" />
-                <path d="M20,20 L35,20" class="arm-r" stroke="currentColor" style="transform-origin: 20px 20px;" />
-                <path d="M20,35 L5,45" class="leg-l" stroke="currentColor" style="transform-origin: 20px 35px;" />
-                <path d="M20,35 L35,45" class="leg-r" stroke="currentColor" style="transform-origin: 20px 35px;" />
-            </g>
-        </defs>
-    </svg>
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
 
-    <div class="dancing-bg">
-        <svg class="dancer" style="top: 5%; left: 10%; transform: rotate(15deg) scale(1.1); color: var(--klimt-gold);" viewBox="0 0 40 60" stroke-width="2" fill="none" stroke-linecap="round"><use href="#pose-1"/></svg>
-        <svg class="dancer" style="top: 15%; left: 85%; transform: rotate(-10deg); color: var(--klimt-yellow);" viewBox="0 0 40 60" stroke-width="2" fill="none" stroke-linecap="round"><use href="#pose-2"/></svg>
-        <svg class="dancer" style="top: 40%; left: 5%; transform: rotate(25deg); color: var(--klimt-red);" viewBox="0 0 40 60" stroke-width="2" fill="none" stroke-linecap="round"><use href="#pose-3"/></svg>
-        <svg class="dancer" style="top: 75%; left: 15%; transform: rotate(-20deg) scale(1.2); color: var(--klimt-gold);" viewBox="0 0 40 60" stroke-width="2" fill="none" stroke-linecap="round"><use href="#pose-4"/></svg>
-        <svg class="dancer" style="top: 60%; left: 90%; transform: rotate(5deg); color: var(--klimt-yellow);" viewBox="0 0 40 60" stroke-width="2" fill="none" stroke-linecap="round"><use href="#pose-1"/></svg>
-        <svg class="dancer" style="top: 85%; left: 45%; transform: rotate(-15deg); color: var(--klimt-red);" viewBox="0 0 40 60" stroke-width="2" fill="none" stroke-linecap="round"><use href="#pose-2"/></svg>
-        <svg class="dancer" style="top: 25%; left: 65%; transform: rotate(35deg) scale(0.9); color: var(--klimt-gold);" viewBox="0 0 40 60" stroke-width="2" fill="none" stroke-linecap="round"><use href="#pose-3"/></svg>
-        <svg class="dancer" style="top: 45%; left: 35%; transform: rotate(-35deg); color: var(--klimt-red);" viewBox="0 0 40 60" stroke-width="2" fill="none" stroke-linecap="round"><use href="#pose-4"/></svg>
-        <svg class="dancer" style="top: 30%; left: 25%; transform: rotate(45deg); color: var(--klimt-yellow);" viewBox="0 0 40 60" stroke-width="2" fill="none" stroke-linecap="round"><use href="#pose-1"/></svg>
-        <svg class="dancer" style="top: 10%; left: 45%; transform: rotate(5deg) scale(1.15); color: var(--klimt-gold);" viewBox="0 0 40 60" stroke-width="2" fill="none" stroke-linecap="round"><use href="#pose-2"/></svg>
-        <svg class="dancer" style="top: 90%; left: 10%; transform: rotate(-5deg); color: var(--klimt-yellow);" viewBox="0 0 40 60" stroke-width="2" fill="none" stroke-linecap="round"><use href="#pose-3"/></svg>
-        <svg class="dancer" style="top: 55%; left: 70%; transform: rotate(12deg); color: var(--klimt-red);" viewBox="0 0 40 60" stroke-width="2" fill="none" stroke-linecap="round"><use href="#pose-4"/></svg>
-        <svg class="dancer" style="top: 70%; left: 35%; transform: rotate(-18deg) scale(1.05); color: var(--klimt-gold);" viewBox="0 0 40 60" stroke-width="2" fill="none" stroke-linecap="round"><use href="#pose-1"/></svg>
-        <svg class="dancer" style="top: 85%; left: 75%; transform: rotate(8deg); color: var(--klimt-yellow);" viewBox="0 0 40 60" stroke-width="2" fill="none" stroke-linecap="round"><use href="#pose-2"/></svg>
-        <svg class="dancer" style="top: 20%; left: 40%; transform: rotate(-25deg); color: var(--klimt-red);" viewBox="0 0 40 60" stroke-width="2" fill="none" stroke-linecap="round"><use href="#pose-3"/></svg>
-        <svg class="dancer" style="top: 12%; left: 25%; transform: rotate(40deg); color: var(--klimt-gold);" viewBox="0 0 40 60" stroke-width="2" fill="none" stroke-linecap="round"><use href="#pose-4"/></svg>
-        <svg class="dancer" style="top: 35%; left: 55%; transform: rotate(-5deg) scale(0.95); color: var(--klimt-yellow);" viewBox="0 0 40 60" stroke-width="2" fill="none" stroke-linecap="round"><use href="#pose-1"/></svg>
-        <svg class="dancer" style="top: 55%; left: 20%; transform: rotate(18deg); color: var(--klimt-red);" viewBox="0 0 40 60" stroke-width="2" fill="none" stroke-linecap="round"><use href="#pose-2"/></svg>
-        <svg class="dancer" style="top: 80%; left: 30%; transform: rotate(-30deg); color: var(--klimt-gold);" viewBox="0 0 40 60" stroke-width="2" fill="none" stroke-linecap="round"><use href="#pose-3"/></svg>
-        <svg class="dancer" style="top: 95%; left: 60%; transform: rotate(10deg) scale(1.1); color: var(--klimt-yellow);" viewBox="0 0 40 60" stroke-width="2" fill="none" stroke-linecap="round"><use href="#pose-4"/></svg>
-        <svg class="dancer" style="top: 65%; left: 50%; transform: rotate(-12deg); color: var(--klimt-red);" viewBox="0 0 40 60" stroke-width="2" fill="none" stroke-linecap="round"><use href="#pose-1"/></svg>
-        <svg class="dancer" style="top: 45%; left: 85%; transform: rotate(22deg); color: var(--klimt-gold);" viewBox="0 0 40 60" stroke-width="2" fill="none" stroke-linecap="round"><use href="#pose-2"/></svg>
-        <svg class="dancer" style="top: 25%; left: 45%; transform: rotate(-8deg) scale(1.2); color: var(--klimt-yellow);" viewBox="0 0 40 60" stroke-width="2" fill="none" stroke-linecap="round"><use href="#pose-3"/></svg>
-        <svg class="dancer" style="top: 5%; left: 70%; transform: rotate(30deg); color: var(--klimt-red);" viewBox="0 0 40 60" stroke-width="2" fill="none" stroke-linecap="round"><use href="#pose-4"/></svg>
-        <svg class="dancer" style="top: 50%; left: 10%; transform: rotate(-25deg); color: var(--klimt-gold);" viewBox="0 0 40 60" stroke-width="2" fill="none" stroke-linecap="round"><use href="#pose-1"/></svg>
-    </div>
-
-    <nav class="flex flex-col md:flex-row justify-between items-center mb-8 md:mb-12 z-20 relative max-w-7xl mx-auto bg-[var(--klimt-cream)] border-4 border-[var(--klimt-black)] p-4 shadow-[6px_6px_0px_var(--klimt-gold)] w-full gap-4">
-        <h1 class="text-2xl md:text-3xl lg:text-4xl font-black tracking-wider m-0 text-[var(--klimt-red)] text-center">Sruthi Korlakunta</h1>
-        <div class="flex flex-wrap justify-center gap-4 md:space-x-6 md:gap-0 text-base md:text-xl">
+    <nav class="glass-nav py-4 px-6 md:px-12 flex flex-col md:flex-row justify-between items-center mb-12">
+        <h1 class="text-3xl md:text-4xl lg:text-5xl font-serif-custom font-bold m-0 text-black tracking-tight"><a href="index.html">Sruthi Korlakunta</a></h1>
+        <div class="flex flex-wrap justify-center gap-6 mt-4 md:mt-0">
             <a href="index.html" class="link-hover">Home</a>
             <a href="summary.html" class="link-hover">Summary</a>
+            <a href="resume.html" class="link-hover">Resume</a>
             <a href="blog.html" class="link-hover active-link">Blog</a>
             <a href="contact.html" class="link-hover">Contact</a>
+            <a href="knowledgeDB/index.html" class="link-hover">Sruthi AI</a>
         </div>
     </nav>
 
-    <main class="max-w-7xl mx-auto z-20 relative w-full items-stretch flex-grow mb-12">
-        <div class="bento-box text-center mb-16">
-            <div class="klimt-border"></div>
-            <h2 class="text-5xl mb-4 text-[var(--klimt-red)]">The Chronicles</h2>
-            <p class="text-xl text-[var(--klimt-black)] font-bold mb-4">A collection of mind-spills, technical explorations, and existential thoughts.</p>
-            <a href="https://medium.com/@sruthikorlakunta" target="_blank" class="inline-block text-2xl font-black text-[var(--klimt-red)] underline hover:text-[var(--klimt-black)] transition-colors">medium.com/@sruthikorlakunta</a>
+    <main class="max-w-7xl mx-auto px-6 md:px-12 w-full mb-20">
+        
+        <div class="text-center mb-16 gsap-reveal">
+            <h2 class="text-5xl md:text-6xl font-serif-custom mb-6 font-bold">The Chronicles</h2>
+            <p class="text-lg text-gray-600 mb-6 max-w-2xl mx-auto">A curated gallery of mind-spills, technical explorations, and existential thoughts beautifully woven into words.</p>
+            <a href="https://medium.com/@sruthikorlakunta" target="_blank" class="text-cyan font-medium uppercase tracking-widest text-sm hover:text-rust transition-colors border-b border-cyan hover:border-rust pb-1">Follow on Medium &rarr;</a>
         </div>
 
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 py-6 items-stretch">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 pb-12">
             
-            <!-- Card 1 -->
-            <div class="card-wrapper" onclick="window.open('https://medium.com/in-fitness-and-in-health/the-unsung-heroes-of-glass-skin-routines-0a606324b039', '_blank')">
-                <div class="card-3d">
-                    <div class="card-image-container">
-                        <img src="https://cdn-images-1.medium.com/max/1116/1*_PG0cG2fIJfRAqCnAKadkw.jpeg" alt="The Unsung Heroes of Glass Skin Routines">
-                    </div>
-                    <div class="card-content">
-                        <h4 class="text-xl mb-3 leading-tight text-[var(--klimt-black)]">The Unsung Heroes of Glass Skin Routines</h4>
-                        <p class="text-sm font-bold text-[var(--klimt-red)]">The biggest factors are those they never talk about</p>
-                    </div>
+            <!-- Cards -->
+            <div class="glass-card article-card gsap-reveal" onclick="window.open('https://medium.com/in-fitness-and-in-health/the-unsung-heroes-of-glass-skin-routines-0a606324b039', '_blank')">
+                <div class="article-image-container">
+                    <img src="https://cdn-images-1.medium.com/max/1116/1*_PG0cG2fIJfRAqCnAKadkw.jpeg" alt="The Unsung Heroes of Glass Skin Routines">
+                </div>
+                <div class="p-6 flex flex-col flex-grow">
+                    <h4 class="text-2xl font-serif-custom mb-3 leading-tight group-hover:text-cyan transition-colors font-bold">The Unsung Heroes of Glass Skin Routines</h4>
+                    <p class="text-sm text-gray-500 mt-auto">The biggest factors are those they never talk about</p>
                 </div>
             </div>
 
-            <!-- Card 2 -->
-            <div class="card-wrapper" onclick="window.open('https://sruthikorlakunta.medium.com/python-diy-building-a-custom-chatbot-using-the-claudeapi-a6ece3fdf6e5', '_blank')">
-                <div class="card-3d">
-                    <div class="card-image-container">
-                        <img src="https://cdn-images-1.medium.com/max/2600/0*GIgZw2O8y-AWhu2t" alt="Python DIY: Building A Custom Chatbot using the ClaudeAPI">
-                    </div>
-                    <div class="card-content">
-                        <h4 class="text-xl mb-3 leading-tight text-[var(--klimt-black)]">Python DIY: Building A Custom Chatbot using the ClaudeAPI</h4>
-                        <p class="text-sm font-bold text-[var(--klimt-red)]">Foundational steps</p>
-                    </div>
+            <div class="glass-card article-card gsap-reveal" onclick="window.open('https://sruthikorlakunta.medium.com/python-diy-building-a-custom-chatbot-using-the-claudeapi-a6ece3fdf6e5', '_blank')">
+                <div class="article-image-container">
+                    <img src="https://cdn-images-1.medium.com/max/2600/0*GIgZw2O8y-AWhu2t" alt="Python DIY: Building A Custom Chatbot using the ClaudeAPI">
+                </div>
+                <div class="p-6 flex flex-col flex-grow">
+                    <h4 class="text-2xl font-serif-custom mb-3 leading-tight font-bold">Python DIY: Building A Custom Chatbot using the ClaudeAPI</h4>
+                    <p class="text-sm text-gray-500 mt-auto">Foundational steps</p>
                 </div>
             </div>
 
-            <!-- Card 3 -->
-            <div class="card-wrapper" onclick="window.open('https://medium.com/design-bootcamp/which-claude-model-to-use-ffc32c545786', '_blank')">
-                <div class="card-3d">
-                    <div class="card-image-container">
-                        <img src="https://cdn-images-1.medium.com/max/2600/0*v7wEe3DHc3WUk6ZT" alt="Which Claude Model to Use?">
-                    </div>
-                    <div class="card-content">
-                        <h4 class="text-xl mb-3 leading-tight text-[var(--klimt-black)]">Which Claude Model to Use?</h4>
-                        <p class="text-sm font-bold text-[var(--klimt-red)]">Between Opus, Sonnet and Haiku</p>
-                    </div>
+            <div class="glass-card article-card gsap-reveal" onclick="window.open('https://medium.com/design-bootcamp/which-claude-model-to-use-ffc32c545786', '_blank')">
+                <div class="article-image-container">
+                    <img src="https://cdn-images-1.medium.com/max/2600/0*v7wEe3DHc3WUk6ZT" alt="Which Claude Model to Use?">
+                </div>
+                <div class="p-6 flex flex-col flex-grow">
+                    <h4 class="text-2xl font-serif-custom mb-3 leading-tight font-bold">Which Claude Model to Use?</h4>
+                    <p class="text-sm text-gray-500 mt-auto">Between Opus, Sonnet and Haiku</p>
                 </div>
             </div>
 
-            <!-- Card 4 -->
-            <div class="card-wrapper" onclick="window.open('https://sruthikorlakunta.medium.com/the-a-b-c-of-ai-fluency-bcc80635c61f', '_blank')">
-                <div class="card-3d">
-                    <div class="card-image-container">
-                        <img src="https://cdn-images-1.medium.com/max/2600/0*CKvW3qwZiV23h-fA" alt="The A-B-C of AI Fluency">
-                    </div>
-                    <div class="card-content">
-                        <h4 class="text-xl mb-3 leading-tight text-[var(--klimt-black)]">The A-B-C of AI Fluency</h4>
-                        <p class="text-sm font-bold text-[var(--klimt-red)]">Beyond Prompt Engineering: Follow this framework to make AI your first language.</p>
-                    </div>
+            <div class="glass-card article-card gsap-reveal" onclick="window.open('https://sruthikorlakunta.medium.com/the-a-b-c-of-ai-fluency-bcc80635c61f', '_blank')">
+                <div class="article-image-container">
+                    <img src="https://cdn-images-1.medium.com/max/2600/0*CKvW3qwZiV23h-fA" alt="The A-B-C of AI Fluency">
+                </div>
+                <div class="p-6 flex flex-col flex-grow">
+                    <h4 class="text-2xl font-serif-custom mb-3 leading-tight font-bold">The A-B-C of AI Fluency</h4>
+                    <p class="text-sm text-gray-500 mt-auto">Beyond Prompt Engineering: Follow this framework to make AI your first language.</p>
                 </div>
             </div>
 
-            <!-- Card 5 -->
-            <div class="card-wrapper" onclick="window.open('https://medium.com/in-fitness-and-in-health/the-chia-seed-fallacy-4d3dfdd81cae', '_blank')">
-                <div class="card-3d">
-                    <div class="card-image-container">
-                        <img src="https://cdn-images-1.medium.com/max/2600/0*zGA6moN_Zi-gOoJx" alt="The Chia Seed Fallacy">
-                    </div>
-                    <div class="card-content">
-                        <h4 class="text-xl mb-3 leading-tight text-[var(--klimt-black)]">The Chia Seed Fallacy</h4>
-                        <p class="text-sm font-bold text-[var(--klimt-red)]">The proof is in the pudding</p>
-                    </div>
+            <div class="glass-card article-card gsap-reveal" onclick="window.open('https://medium.com/in-fitness-and-in-health/the-chia-seed-fallacy-4d3dfdd81cae', '_blank')">
+                <div class="article-image-container">
+                    <img src="https://cdn-images-1.medium.com/max/2600/0*zGA6moN_Zi-gOoJx" alt="The Chia Seed Fallacy">
+                </div>
+                <div class="p-6 flex flex-col flex-grow">
+                    <h4 class="text-2xl font-serif-custom mb-3 leading-tight font-bold">The Chia Seed Fallacy</h4>
+                    <p class="text-sm text-gray-500 mt-auto">The proof is in the pudding</p>
                 </div>
             </div>
 
-            <!-- Card 6 -->
-            <div class="card-wrapper" onclick="window.open('https://medium.datadriveninvestor.com/best-way-to-begin-using-claude-code-in-your-projects-e1f996934f50', '_blank')">
-                <div class="card-3d">
-                    <div class="card-image-container">
-                        <img src="https://cdn-images-1.medium.com/max/2318/1*zwtAcstfRLHinsiJJvR--A.png" alt="Best Way To Begin Using Claude Code in Your Projects">
-                    </div>
-                    <div class="card-content">
-                        <h4 class="text-xl mb-3 leading-tight text-[var(--klimt-black)]">Best Way To Begin Using Claude Code in Your Projects</h4>
-                        <p class="text-sm font-bold text-[var(--klimt-red)]">Learn here from Anthropic Academy. Claude Code is Copilot on Steroids.</p>
-                    </div>
+            <div class="glass-card article-card gsap-reveal" onclick="window.open('https://medium.datadriveninvestor.com/best-way-to-begin-using-claude-code-in-your-projects-e1f996934f50', '_blank')">
+                <div class="article-image-container">
+                    <img src="https://cdn-images-1.medium.com/max/2318/1*zwtAcstfRLHinsiJJvR--A.png" alt="Best Way To Begin Using Claude Code in Your Projects">
+                </div>
+                <div class="p-6 flex flex-col flex-grow">
+                    <h4 class="text-2xl font-serif-custom mb-3 leading-tight font-bold">Best Way To Begin Using Claude Code in Your Projects</h4>
+                    <p class="text-sm text-gray-500 mt-auto">Learn here from Anthropic Academy. Claude Code is Copilot on Steroids.</p>
                 </div>
             </div>
 
-            <!-- Card 7 -->
-            <div class="card-wrapper" onclick="window.open('https://sruthikorlakunta.medium.com/claude-code-logged-into-my-medium-com-and-wrote-this-article-d4ea207ffb22', '_blank')">
-                <div class="card-3d">
-                    <div class="card-image-container">
-                        <img src="https://cdn-images-1.medium.com/max/1200/1*p-O2Pjgvl8O_3M_9dM9X7A.png" alt="Claude Code logged into my Medium.com and wrote this article">
-                    </div>
-                    <div class="card-content">
-                        <h4 class="text-xl mb-3 leading-tight text-[var(--klimt-black)]">Claude Code logged into my Medium.com and wrote this article</h4>
-                        <p class="text-sm font-bold text-[var(--klimt-red)]">I Let Claude Code Rewrite Its Own AI Prompt — Here's What Happened</p>
-                    </div>
+            <div class="glass-card article-card gsap-reveal" onclick="window.open('https://sruthikorlakunta.medium.com/claude-code-logged-into-my-medium-com-and-wrote-this-article-d4ea207ffb22', '_blank')">
+                <div class="article-image-container">
+                    <img src="https://cdn-images-1.medium.com/max/1200/1*p-O2Pjgvl8O_3M_9dM9X7A.png" alt="Claude Code logged into my Medium.com and wrote this article">
+                </div>
+                <div class="p-6 flex flex-col flex-grow">
+                    <h4 class="text-2xl font-serif-custom mb-3 leading-tight font-bold">Claude Code logged into my Medium.com and wrote this article</h4>
+                    <p class="text-sm text-gray-500 mt-auto">I Let Claude Code Rewrite Its Own AI Prompt — Here's What Happened</p>
                 </div>
             </div>
 
-            <!-- Card 8 -->
-            <div class="card-wrapper" onclick="window.open('https://aninjusticemag.com/visits-to-india-are-heart-breaking-and-nris-are-not-honest-about-it-dcc13cd1e5e7', '_blank')">
-                <div class="card-3d">
-                    <div class="card-image-container">
-                        <img src="https://cdn-images-1.medium.com/max/2600/1*cBd_cPiNo9pGzZVM9qfWVQ.jpeg" alt="Visits to India are Heart-breaking and NRIs Are Not Honest About It">
-                    </div>
-                    <div class="card-content">
-                        <h4 class="text-xl mb-3 leading-tight text-[var(--klimt-black)]">Visits to India are Heart-breaking and NRIs Are Not Honest About It</h4>
-                        <p class="text-sm font-bold text-[var(--klimt-red)]">Notes from my last trip to India — Bangalore and Tirupati</p>
-                    </div>
+            <div class="glass-card article-card gsap-reveal" onclick="window.open('https://aninjusticemag.com/visits-to-india-are-heart-breaking-and-nris-are-not-honest-about-it-dcc13cd1e5e7', '_blank')">
+                <div class="article-image-container">
+                    <img src="https://cdn-images-1.medium.com/max/2600/1*cBd_cPiNo9pGzZVM9qfWVQ.jpeg" alt="Visits to India are Heart-breaking and NRIs Are Not Honest About It">
+                </div>
+                <div class="p-6 flex flex-col flex-grow">
+                    <h4 class="text-2xl font-serif-custom mb-3 leading-tight font-bold">Visits to India are Heart-breaking and NRIs Are Not Honest About It</h4>
+                    <p class="text-sm text-gray-500 mt-auto">Notes from my last trip to India — Bangalore and Tirupati</p>
                 </div>
             </div>
 
-            <!-- Card 9 -->
-            <div class="card-wrapper" onclick="window.open('https://sruthikorlakunta.medium.com/shut-up-and-take-my-money-7-products-services-in-my-hall-of-fame-ce4736758617', '_blank')">
-                <div class="card-3d">
-                    <div class="card-image-container">
-                        <img src="https://cdn-images-1.medium.com/max/2600/1*xFBwd_tkvtxh_OijU2HppQ.jpeg" alt="Shut up and take my money: 7 Products & Services in my Hall of Fame">
-                    </div>
-                    <div class="card-content">
-                        <h4 class="text-xl mb-3 leading-tight text-[var(--klimt-black)]">Shut up and take my money: 7 Products & Services in my Hall of Fame</h4>
-                        <p class="text-sm font-bold text-[var(--klimt-red)]">They improved my life exponentially and are worth every penny</p>
-                    </div>
+            <div class="glass-card article-card gsap-reveal" onclick="window.open('https://sruthikorlakunta.medium.com/shut-up-and-take-my-money-7-products-services-in-my-hall-of-fame-ce4736758617', '_blank')">
+                <div class="article-image-container">
+                    <img src="https://cdn-images-1.medium.com/max/2600/1*xFBwd_tkvtxh_OijU2HppQ.jpeg" alt="Shut up and take my money: 7 Products & Services in my Hall of Fame">
+                </div>
+                <div class="p-6 flex flex-col flex-grow">
+                    <h4 class="text-2xl font-serif-custom mb-3 leading-tight font-bold">Shut up and take my money: 7 Products & Services in my Hall of Fame</h4>
+                    <p class="text-sm text-gray-500 mt-auto">They improved my life exponentially and are worth every penny</p>
                 </div>
             </div>
 
-            <!-- Card 10 -->
-            <div class="card-wrapper" onclick="window.open('https://sruthikorlakunta.medium.com/what-i-wish-i-knew-before-moving-from-the-eu-to-the-usa-8b7bab8f960b', '_blank')">
-                <div class="card-3d">
-                    <div class="card-image-container">
-                        <img src="https://cdn-images-1.medium.com/max/2268/1*11Qfyk0oO9iiKmg7krOybQ.jpeg" alt="What I Wish I Knew Before Moving from the EU to the USA.">
-                    </div>
-                    <div class="card-content">
-                        <h4 class="text-xl mb-3 leading-tight text-[var(--klimt-black)]">What I Wish I Knew Before Moving from the EU to the USA.</h4>
-                        <p class="text-sm font-bold text-[var(--klimt-red)]">I'm an Indian girl who spent eleven years calling Germany home before landing in the United States.</p>
-                    </div>
+            <div class="glass-card article-card gsap-reveal" onclick="window.open('https://sruthikorlakunta.medium.com/what-i-wish-i-knew-before-moving-from-the-eu-to-the-usa-8b7bab8f960b', '_blank')">
+                <div class="article-image-container">
+                    <img src="https://cdn-images-1.medium.com/max/2268/1*11Qfyk0oO9iiKmg7krOybQ.jpeg" alt="What I Wish I Knew Before Moving from the EU to the USA.">
+                </div>
+                <div class="p-6 flex flex-col flex-grow">
+                    <h4 class="text-2xl font-serif-custom mb-3 leading-tight font-bold">What I Wish I Knew Before Moving from the EU to the USA.</h4>
+                    <p class="text-sm text-gray-500 mt-auto">I'm an Indian girl who spent eleven years calling Germany home before landing in the United States.</p>
                 </div>
             </div>
 
@@ -396,38 +286,18 @@
     </main>
 
     <script>
-        // 3D Tilt Effect for Cards
-        document.querySelectorAll('.card-wrapper').forEach(wrapper => {
-            const card = wrapper.querySelector('.card-3d');
-            
-            wrapper.addEventListener('mousemove', e => {
-                const rect = wrapper.getBoundingClientRect();
-                const x = e.clientX - rect.left; // x position within the element
-                const y = e.clientY - rect.top;  // y position within the element
-                
-                const centerX = rect.width / 2;
-                const centerY = rect.height / 2;
-                
-                // Calculate rotation (max 15 degrees)
-                const rotateX = ((y - centerY) / centerY) * -15;
-                const rotateY = ((x - centerX) / centerX) * 15;
-                
-                card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.05, 1.05, 1.05)`;
-                card.style.boxShadow = `${-rotateY}px ${rotateX + 10}px 0px var(--klimt-gold)`;
-            });
-            
-            wrapper.addEventListener('mouseleave', () => {
-                card.style.transform = `rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
-                card.style.boxShadow = `6px 6px 0px var(--klimt-gold)`;
-            });
-        });
-    </script>
-
-    <script>
-        // Mobile touch support for dancers
-        document.querySelectorAll('.dancer').forEach(dancer => {
-            dancer.addEventListener('touchstart', (e) => {
-                dancer.style.zIndex = '100';
+        gsap.registerPlugin(ScrollTrigger);
+        gsap.utils.toArray('.gsap-reveal').forEach((element, i) => {
+            gsap.to(element, {
+                scrollTrigger: {
+                    trigger: element,
+                    start: "top 90%",
+                },
+                opacity: 1,
+                y: 0,
+                duration: 0.8,
+                delay: i % 3 * 0.1,
+                ease: "power3.out"
             });
         });
     </script>

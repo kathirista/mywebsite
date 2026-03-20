@@ -77,10 +77,13 @@ function render() {
     drawLeafPaddle(com.x, com.y, com.width, com.height, com.color);
 }
 
-canvas.addEventListener('mousemove', (e) => {
+canvas.addEventListener('touchmove', (e) => {
     let rect = canvas.getBoundingClientRect();
-    user.y = e.clientY - rect.top - user.height / 2;
-});
+    // Use touches[0] for mobile touch
+    user.y = e.touches[0].clientY - rect.top - user.height / 2;
+    // Prevent default scrolling when playing
+    e.preventDefault();
+}, { passive: false });
 
 function update() {
     ball.x += ball.dx;

@@ -1,10 +1,10 @@
 :root {
-    --vivid-purple: #8A2BE2;
-    --hot-pink: #FF69B4;
-    --teal: #008080;
-    --gold: #FFD700;
-    --parchment: #fcf5e5;
-    --text-color: #3a2d22;
+    --vivid-purple: #35524A;
+    --hot-pink: #C2A36B;
+    --teal: #1E2320;
+    --gold: #E6CE9C;
+    --parchment: #FAF7F2;
+    --text-color: #1A1F1A;
 }
 
 body {
@@ -24,7 +24,7 @@ body {
 }
 
 h1, h2, h3 {
-    font-family: 'Playfair Display', serif;
+    font-family: 'Poiret One', cursive;
     font-weight: 700;
 }
 
@@ -41,11 +41,11 @@ h1, h2, h3 {
     text-decoration: none;
     margin: 0 25px;
     font-size: 1.3em;
-    font-family: 'Playfair Display', serif;
+    font-family: 'Poiret One', cursive;
     transition: transform 0.3s ease;
 }
 
-.main-nav a:hover {
+.main-nav a:active {
     transform: scale(1.1);
     color: var(--gold);
 }
@@ -56,7 +56,7 @@ h1, h2, h3 {
 }
 
 .gemma-intro {
-    font-family: 'Playfair Display', serif;
+    font-family: 'Poiret One', cursive;
     font-style: italic;
     font-size: 1.8em;
     color: var(--teal);
@@ -88,7 +88,7 @@ h1, h2, h3 {
     content: "";
     position: absolute;
     top: -20px; left: -20px; right: -20px; bottom: -20px;
-    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M50 0 C 70 10 90 30 100 50 C 90 70 70 90 50 100 C 30 90 10 70 0 50 C 10 30 30 10 50 0" fill="none" stroke="%23FF69B4" stroke-width="2"/></svg>');
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M50 0 C 70 10 90 30 100 50 C 90 70 70 90 50 100 C 30 90 10 70 0 50 C 10 30 30 10 50 0" fill="none" stroke="%23C2A36B" stroke-width="2"/></svg>');
     background-size: 100% 100%;
     z-index: -1;
     animation: rotate 20s linear infinite;
@@ -130,7 +130,7 @@ h1, h2, h3 {
     position: absolute;
     top: 0; left: 0; right: 0; bottom: 0;
     border: 15px solid transparent;
-    border-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 Q50,20 100,0 Q80,50 100,100 Q50,80 0,100 Q20,50 0,0" fill="none" stroke="%238A2BE2" stroke-width="2"/></svg>') 30 stretch;
+    border-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 Q50,20 100,0 Q80,50 100,100 Q50,80 0,100 Q20,50 0,0" fill="none" stroke="%2335524A" stroke-width="2"/></svg>') 30 stretch;
     pointer-events: none;
 }
 
@@ -152,6 +152,6 @@ h1, h2, h3 {
     display: block;
     margin: 0 auto;
     border-radius: 10px;
-    cursor: none;
+    
     max-width: 100%;
 }

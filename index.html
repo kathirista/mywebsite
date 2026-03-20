@@ -7,618 +7,405 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poiret+One&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <style>
         :root {
-            --klimt-gold: #B38B36;
-            --klimt-yellow: #D4AF37;
-            --klimt-red: #4A0E17;
-            --klimt-black: #0F0C0C;
-            --klimt-cream: #EFE6D5;
+            --bg-cream: #F8F4EF;
+            --text-black: #110F0D;
+            --accent-cyan: #3C9DB8;
+            --accent-rust: #965D37;
+            --glass-bg: rgba(248, 244, 239, 0.7);
+            --glass-border: rgba(255, 255, 255, 0.5);
         }
+        
         body {
-            font-family: 'Lora', serif;
-            background-color: var(--klimt-black);
-            background-image: 
-                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 160 160'%3E%3Cg fill-opacity='0.07'%3E%3Cpath fill='%23B38B36' d='M0 80 Q 40 0, 80 80 T 160 80 Q 120 160, 80 80 T 0 80 Z'/%3E%3Cpath fill='%234A0E17' d='M80 0 Q 160 40, 80 80 T 80 160 Q 0 120, 80 80 T 80 0 Z'/%3E%3Ccircle cx='80' cy='80' r='25' fill='%23E5C158' fill-opacity='0.04'/%3E%3Ccircle cx='80' cy='80' r='12' fill='%23B38B36' fill-opacity='0.08'/%3E%3Crect x='70' y='70' width='20' height='20' fill='%234A0E17' fill-opacity='0.08' transform='rotate(45 80 80)'/%3E%3C/g%3E%3C/svg%3E"),
-                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400' viewBox='0 0 400 400'%3E%3Cpath d='M 100 100 Q 200 0 300 100 Q 400 200 300 300 Q 200 400 100 300 Q 0 200 100 100 Z' fill='none' stroke='%23D4AF37' stroke-width='1' stroke-opacity='0.15'/%3E%3Cpath d='M 150 150 Q 200 50 250 150 Q 350 200 250 250 Q 200 350 150 250 Q 50 200 150 150 Z' fill='none' stroke='%234A0E17' stroke-width='1' stroke-opacity='0.15'/%3E%3C/svg%3E");
-            color: var(--klimt-black);
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-cream);
+            color: var(--text-black);
             min-height: 100vh;
             position: relative;
             overflow-x: hidden;
-            font-size: 1.1rem;
-        }
-        
-        h1, h2, h3, h4 {
-            font-family: 'Cinzel Decorative', serif;
-            color: var(--klimt-red);
-            font-weight: 900;
+            font-size: 1.05rem;
+            line-height: 1.6;
+            margin: 0;
         }
 
-        .story-p::first-letter {
-            font-family: 'Cinzel Decorative', serif;
-            font-size: 4rem;
-            float: left;
-            margin-right: 12px;
-            margin-bottom: -15px;
-            margin-top: -5px;
-            line-height: 1;
-            color: var(--klimt-red);
-            text-shadow: 2px 2px 0px var(--klimt-cream), 4px 4px 0px var(--klimt-black);
-        }
-        
-        .bento-box {
-            background-color: var(--klimt-cream);
-            border: 4px solid var(--klimt-black);
-            border-radius: 0;
-            position: relative;
-            padding: 1.5rem;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            box-shadow: 8px 8px 0px var(--klimt-gold);
-            z-index: 20;
-        }
-        @media (min-width: 768px) {
-            .bento-box {
-                padding: 2.5rem;
-            }
-        }
-        .bento-box:hover {
-            transform: translate(-4px, -4px);
-            box-shadow: 12px 12px 0px var(--klimt-gold);
-        }
-
-        .klimt-border {
-            position: absolute;
-            top: 4px; left: 4px; right: 4px; bottom: 4px;
-            border: 2px dashed var(--klimt-red);
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
             pointer-events: none;
+            z-index: 9999;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
+            opacity: 0.6;
         }
-        .klimt-border::before, .klimt-border::after {
+
+        h1, h2, h3, h4 {
+            font-family: 'Poiret One', cursive;
+            font-weight: 600;
+            color: var(--text-black);
+            letter-spacing: -0.02em;
+        }
+
+        .font-serif-custom {
+            font-family: 'Poiret One', cursive;
+        }
+
+        .glass-nav {
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--glass-border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            border-radius: 24px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.03);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            overflow: hidden;
+        }
+        .glass-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.06);
+        }
+
+        .text-cyan { color: var(--accent-cyan); }
+        .text-rust { color: var(--accent-rust); }
+        .bg-cyan { background-color: var(--accent-cyan); }
+        .bg-rust { background-color: var(--accent-rust); }
+
+        .link-hover {
+            color: var(--text-black);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            position: relative;
+            font-weight: 500;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        .link-hover::after {
             content: '';
             position: absolute;
-            width: 20px; height: 20px;
-            background-color: var(--klimt-black);
+            width: 0;
+            height: 1px;
+            bottom: -4px;
+            left: 0;
+            background-color: var(--accent-cyan);
+            transition: width 0.3s ease;
         }
-        .klimt-border::before {
-            top: -10px; left: -10px;
+        .link-hover:hover::after, .active-link::after {
+            width: 100%;
+        }
+        .active-link {
+            color: var(--accent-cyan);
+        }
+
+        .blob {
+            position: absolute;
+            filter: blur(100px);
+            z-index: -1;
+            opacity: 0.4;
+            animation: moveBlob 25s infinite alternate ease-in-out;
             border-radius: 50%;
         }
-        .klimt-border::after {
-            bottom: -10px; right: -10px;
-            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
-            background-color: var(--klimt-gold);
+        .blob-1 { top: -10%; left: -10%; width: 50vw; height: 50vw; background: var(--accent-cyan); }
+        .blob-2 { bottom: 10%; right: -10%; width: 40vw; height: 40vw; background: var(--accent-rust); }
+        .blob-3 { top: 40%; left: 30%; width: 30vw; height: 30vw; background: #e0d5c1; animation-delay: -5s; }
+
+        @keyframes moveBlob {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(5%, 15%) scale(1.1); }
         }
 
-        .speech-bubble {
-            position: relative;
-            background: #fff;
-            border: 3px solid var(--klimt-black);
-            padding: 1rem;
-            border-radius: 0;
-            font-size: 1.1rem;
-            margin-bottom: 2rem;
-            color: var(--klimt-red);
-            box-shadow: 4px 4px 0px rgba(15, 12, 12, 0.3);
-            font-family: 'Cinzel Decorative', serif;
-            font-weight: 700;
-        }
-        .speech-bubble::after {
-            content: '';
+        .artistic-shape {
             position: absolute;
-            bottom: -15px; left: 20px;
-            border-width: 15px 15px 0 0;
-            border-style: solid;
-            border-color: var(--klimt-black) transparent transparent transparent;
+            z-index: 0;
+            opacity: 0.3;
+            pointer-events: none;
+            animation: floatSlow 20s infinite alternate ease-in-out;
         }
-        .speech-bubble-inner::after {
-            content: '';
-            position: absolute;
-            bottom: -10px; left: 23px;
-            border-width: 10px 10px 0 0;
-            border-style: solid;
-            border-color: #fff transparent transparent transparent;
-            z-index: 10;
+        
+        .shape-1 { top: 15%; right: 15%; animation-delay: -5s; }
+        .shape-2 { bottom: 25%; left: 10%; animation-duration: 25s; }
+        .shape-3 { top: 50%; right: 5%; animation-duration: 30s; }
+
+        @keyframes floatSlow {
+            0% { transform: translateY(0) rotate(0deg); }
+            100% { transform: translateY(-30px) rotate(15deg); }
         }
+
+        .gsap-reveal {
+            opacity: 0;
+            transform: translateY(40px);
+        }
+        
         .gemma-label {
-            display: flex;
+            display: inline-flex;
             align-items: center;
             gap: 0.5rem;
-            font-family: 'Cinzel Decorative', serif;
-            font-weight: 900;
-            font-size: 0.8rem;
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            font-size: 0.75rem;
             text-transform: uppercase;
-            color: var(--klimt-black);
-            margin-bottom: 0.5rem;
-            border-bottom: 1px solid var(--klimt-red);
-            padding-bottom: 2px;
+            letter-spacing: 0.1em;
+            color: var(--accent-rust);
+            margin-bottom: 1rem;
         }
         .gemma-icon {
-            width: 35px;
-            height: 35px;
-            flex-shrink: 0;
-            animation: float 3s ease-in-out infinite;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-rust));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 40px;
         }
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-3px); }
+
+        .btn-primary {
+            display: inline-block;
+            padding: 0.75rem 2rem;
+            background: var(--text-black);
+            color: var(--bg-cream);
+            border-radius: 30px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-size: 0.85rem;
+        }
+        .btn-primary:hover {
+            background: var(--accent-cyan);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(60, 157, 184, 0.2);
+        }
+
+        .image-parallax-container {
+            overflow: hidden;
+            border-radius: 24px;
+        }
+        .image-parallax {
+            width: 100%;
+            height: 120%;
+            object-fit: cover;
+            transform: translateY(-10%);
         }
 
         #pacman-canvas {
-            background: var(--klimt-cream);
-            border: 4px solid var(--klimt-black);
-            max-width: 100%;
+            border-radius: 16px;
+            background: rgba(17, 15, 13, 0.05);
         }
-        
-        .link-hover {
-            color: var(--klimt-black);
-            text-decoration: none;
-            transition: all 0.2s ease;
-            font-family: 'Cinzel Decorative', serif;
-            text-transform: uppercase;
-            font-weight: 700;
-        }
-        .link-hover:hover {
-            color: var(--klimt-red);
-        }
-        .active-link {
-            color: var(--klimt-red);
-            border-bottom: 2px solid var(--klimt-red);
-        }
-
-        /* 3D Dynamic Card Styling */
-        .card-wrapper {
-            perspective: 1200px;
-            height: 100%;
-            display: block;
-        }
-        .card-3d {
-            background-color: #fff;
-            border: 4px solid var(--klimt-black);
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            transform-style: preserve-3d;
-            transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
-            box-shadow: 6px 6px 0px var(--klimt-gold);
-            position: relative;
-            cursor: pointer;
-        }
-        .card-3d::after {
-            content: '';
-            position: absolute;
-            top: 4px; left: 4px; right: 4px; bottom: 4px;
-            border: 1px dashed var(--klimt-red);
-            pointer-events: none;
-            transform: translateZ(10px);
-        }
-        .card-image-container {
-            height: 200px;
-            overflow: hidden;
-            border-bottom: 4px solid var(--klimt-black);
-            transform: translateZ(20px);
-        }
-        .card-3d img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            filter: sepia(0.2) contrast(1.1);
-        }
-        .card-content {
-            padding: 1.5rem;
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-            transform: translateZ(30px);
-            background-color: var(--klimt-cream);
-        }
-
-        /* ---------------------------------------------------
-           Dancing Stick Figures Animations
-           --------------------------------------------------- */
-        .dancing-bg {
-            position: fixed;
-            top: 0; left: 0; right: 0; bottom: 0;
-            pointer-events: none;
-            z-index: 10;
-            opacity: 0.6;
-        }
-        
-        @keyframes flyOutCurve {
-            0% { transform: translate(0, 0) scale(1) rotate(0deg); opacity: 1; filter: drop-shadow(0 0 8px currentColor); }
-            100% { transform: translate(150vw, -150vh) scale(5) rotate(180deg); opacity: 0; filter: drop-shadow(0 0 30px currentColor); }
-        }
-
-        .dancer {
-            position: absolute;
-            width: 50px; height: 75px;
-            pointer-events: auto;
-            transition: filter 0.3s;
-        }
-        .dancer:hover {
-            z-index: 100;
-        }
-        .dancer:hover .arm-l { animation: waveArmL 0.4s infinite alternate ease-in-out; }
-        .dancer:hover .arm-r { animation: waveArmR 0.4s infinite alternate ease-in-out; }
-        .dancer:hover .leg-l { animation: kickLegL 0.4s infinite alternate ease-in-out; }
-        .dancer:hover .leg-r { animation: kickLegR 0.4s infinite alternate ease-in-out; }
-        .dancer:hover .head { animation: bopHead 0.4s infinite alternate ease-in-out; }
-
-        @keyframes waveArmL { to { transform: rotate(45deg); } }
-        @keyframes waveArmR { to { transform: rotate(-45deg); } }
-        @keyframes kickLegL { to { transform: rotate(30deg); } }
-        @keyframes kickLegR { to { transform: rotate(-30deg); } }
-        @keyframes bopHead { to { transform: translate(2px, 3px); } }
-
     </style>
 </head>
-<body class="p-4 md:p-12 flex flex-col min-h-screen">
+<body>
 
-    <!-- SVG Definitions for Stick Figures -->
-    <svg width="0" height="0" style="position: absolute;">
-        <defs>
-            <g id="pose-1">
-                <circle cx="20" cy="10" r="4" class="head" fill="currentColor" stroke="none" />
-                <line x1="20" y1="14" x2="20" y2="35" class="body" stroke="currentColor" />
-                <path d="M20,20 L10,30" class="arm-l" stroke="currentColor" style="transform-origin: 20px 20px;" />
-                <path d="M20,20 L30,30" class="arm-r" stroke="currentColor" style="transform-origin: 20px 20px;" />
-                <path d="M20,35 L10,55" class="leg-l" stroke="currentColor" style="transform-origin: 20px 35px;" />
-                <path d="M20,35 L30,55" class="leg-r" stroke="currentColor" style="transform-origin: 20px 35px;" />
-            </g>
-            <g id="pose-2">
-                <circle cx="20" cy="10" r="4" class="head" fill="currentColor" stroke="none" />
-                <line x1="20" y1="14" x2="20" y2="35" class="body" stroke="currentColor" />
-                <path d="M20,20 L10,10" class="arm-l" stroke="currentColor" style="transform-origin: 20px 20px;" />
-                <path d="M20,20 L30,30" class="arm-r" stroke="currentColor" style="transform-origin: 20px 20px;" />
-                <path d="M20,35 L10,50" class="leg-l" stroke="currentColor" style="transform-origin: 20px 35px;" />
-                <path d="M20,35 L30,55" class="leg-r" stroke="currentColor" style="transform-origin: 20px 35px;" />
-            </g>
-            <g id="pose-3">
-                <circle cx="20" cy="10" r="4" class="head" fill="currentColor" stroke="none" />
-                <line x1="20" y1="14" x2="20" y2="35" class="body" stroke="currentColor" />
-                <path d="M20,20 L10,10" class="arm-l" stroke="currentColor" style="transform-origin: 20px 20px;" />
-                <path d="M20,20 L30,10" class="arm-r" stroke="currentColor" style="transform-origin: 20px 20px;" />
-                <path d="M20,35 L15,55" class="leg-l" stroke="currentColor" style="transform-origin: 20px 35px;" />
-                <path d="M20,35 L25,55" class="leg-r" stroke="currentColor" style="transform-origin: 20px 35px;" />
-            </g>
-            <g id="pose-4">
-                <circle cx="20" cy="10" r="4" class="head" fill="currentColor" stroke="none" />
-                <line x1="20" y1="14" x2="20" y2="35" class="body" stroke="currentColor" />
-                <path d="M20,20 L5,20" class="arm-l" stroke="currentColor" style="transform-origin: 20px 20px;" />
-                <path d="M20,20 L35,20" class="arm-r" stroke="currentColor" style="transform-origin: 20px 20px;" />
-                <path d="M20,35 L5,45" class="leg-l" stroke="currentColor" style="transform-origin: 20px 35px;" />
-                <path d="M20,35 L35,45" class="leg-r" stroke="currentColor" style="transform-origin: 20px 35px;" />
-            </g>
-        </defs>
-    </svg>
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
 
-    <!-- Dancing stick figures background -->
-    <div class="dancing-bg">
-        <!-- 25 Figures -->
-        <svg class="dancer" style="top: 5%; left: 10%; transform: rotate(15deg) scale(1.1); color: var(--klimt-gold);" viewBox="0 0 40 60" stroke-width="2" fill="none" stroke-linecap="round"><use href="#pose-1"/></svg>
-        <svg class="dancer" style="top: 15%; left: 85%; transform: rotate(-10deg); color: var(--klimt-yellow);" viewBox="0 0 40 60" stroke-width="2" fill="none" stroke-linecap="round"><use href="#pose-2"/></svg>
-        <svg class="dancer" style="top: 40%; left: 5%; transform: rotate(25deg); color: var(--klimt-red);" viewBox="0 0 40 60" stroke-width="2" fill="none" stroke-linecap="round"><use href="#pose-3"/></svg>
-        <svg class="dancer" style="top: 75%; left: 15%; transform: rotate(-20deg) scale(1.2); color: var(--klimt-gold);" viewBox="0 0 40 60" stroke-width="2" fill="none" stroke-linecap="round"><use href="#pose-4"/></svg>
-        <svg class="dancer" style="top: 60%; left: 90%; transform: rotate(5deg); color: var(--klimt-yellow);" viewBox="0 0 40 60" stroke-width="2" fill="none" stroke-linecap="round"><use href="#pose-1"/></svg>
-        <svg class="dancer" style="top: 85%; left: 45%; transform: rotate(-15deg); color: var(--klimt-red);" viewBox="0 0 40 60" stroke-width="2" fill="none" stroke-linecap="round"><use href="#pose-2"/></svg>
-        <svg class="dancer" style="top: 25%; left: 65%; transform: rotate(35deg) scale(0.9); color: var(--klimt-gold);" viewBox="0 0 40 60" stroke-width="2" fill="none" stroke-linecap="round"><use href="#pose-3"/></svg>
-        <svg class="dancer" style="top: 45%; left: 35%; transform: rotate(-35deg); color: var(--klimt-red);" viewBox="0 0 40 60" stroke-width="2" fill="none" stroke-linecap="round"><use href="#pose-4"/></svg>
-        <svg class="dancer" style="top: 30%; left: 25%; transform: rotate(45deg); color: var(--klimt-yellow);" viewBox="0 0 40 60" stroke-width="2" fill="none" stroke-linecap="round"><use href="#pose-1"/></svg>
-        <svg class="dancer" style="top: 10%; left: 45%; transform: rotate(5deg) scale(1.15); color: var(--klimt-gold);" viewBox="0 0 40 60" stroke-width="2" fill="none" stroke-linecap="round"><use href="#pose-2"/></svg>
-        <svg class="dancer" style="top: 90%; left: 10%; transform: rotate(-5deg); color: var(--klimt-yellow);" viewBox="0 0 40 60" stroke-width="2" fill="none" stroke-linecap="round"><use href="#pose-3"/></svg>
-        <svg class="dancer" style="top: 55%; left: 70%; transform: rotate(12deg); color: var(--klimt-red);" viewBox="0 0 40 60" stroke-width="2" fill="none" stroke-linecap="round"><use href="#pose-4"/></svg>
-        <svg class="dancer" style="top: 70%; left: 35%; transform: rotate(-18deg) scale(1.05); color: var(--klimt-gold);" viewBox="0 0 40 60" stroke-width="2" fill="none" stroke-linecap="round"><use href="#pose-1"/></svg>
-        <svg class="dancer" style="top: 85%; left: 75%; transform: rotate(8deg); color: var(--klimt-yellow);" viewBox="0 0 40 60" stroke-width="2" fill="none" stroke-linecap="round"><use href="#pose-2"/></svg>
-        <svg class="dancer" style="top: 20%; left: 40%; transform: rotate(-25deg); color: var(--klimt-red);" viewBox="0 0 40 60" stroke-width="2" fill="none" stroke-linecap="round"><use href="#pose-3"/></svg>
-        
-        <svg class="dancer" style="top: 12%; left: 25%; transform: rotate(40deg); color: var(--klimt-gold);" viewBox="0 0 40 60" stroke-width="2" fill="none" stroke-linecap="round"><use href="#pose-4"/></svg>
-        <svg class="dancer" style="top: 35%; left: 55%; transform: rotate(-5deg) scale(0.95); color: var(--klimt-yellow);" viewBox="0 0 40 60" stroke-width="2" fill="none" stroke-linecap="round"><use href="#pose-1"/></svg>
-        <svg class="dancer" style="top: 55%; left: 20%; transform: rotate(18deg); color: var(--klimt-red);" viewBox="0 0 40 60" stroke-width="2" fill="none" stroke-linecap="round"><use href="#pose-2"/></svg>
-        <svg class="dancer" style="top: 80%; left: 30%; transform: rotate(-30deg); color: var(--klimt-gold);" viewBox="0 0 40 60" stroke-width="2" fill="none" stroke-linecap="round"><use href="#pose-3"/></svg>
-        <svg class="dancer" style="top: 95%; left: 60%; transform: rotate(10deg) scale(1.1); color: var(--klimt-yellow);" viewBox="0 0 40 60" stroke-width="2" fill="none" stroke-linecap="round"><use href="#pose-4"/></svg>
-        <svg class="dancer" style="top: 65%; left: 50%; transform: rotate(-12deg); color: var(--klimt-red);" viewBox="0 0 40 60" stroke-width="2" fill="none" stroke-linecap="round"><use href="#pose-1"/></svg>
-        <svg class="dancer" style="top: 45%; left: 85%; transform: rotate(22deg); color: var(--klimt-gold);" viewBox="0 0 40 60" stroke-width="2" fill="none" stroke-linecap="round"><use href="#pose-2"/></svg>
-        <svg class="dancer" style="top: 25%; left: 45%; transform: rotate(-8deg) scale(1.2); color: var(--klimt-yellow);" viewBox="0 0 40 60" stroke-width="2" fill="none" stroke-linecap="round"><use href="#pose-3"/></svg>
-        <svg class="dancer" style="top: 5%; left: 70%; transform: rotate(30deg); color: var(--klimt-red);" viewBox="0 0 40 60" stroke-width="2" fill="none" stroke-linecap="round"><use href="#pose-4"/></svg>
-        <svg class="dancer" style="top: 50%; left: 10%; transform: rotate(-25deg); color: var(--klimt-gold);" viewBox="0 0 40 60" stroke-width="2" fill="none" stroke-linecap="round"><use href="#pose-1"/></svg>
-    </div>
+    <img src="data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M50 0 L60 40 L100 50 L60 60 L50 100 L40 60 L0 50 L40 40 Z' fill='%23965D37' opacity='0.5'/%3E%3C/svg%3E" class="artistic-shape shape-1" alt="">
+    <img src="data:image/svg+xml,%3Csvg width='120' height='120' viewBox='0 0 120 120' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='60' cy='60' r='50' fill='none' stroke='%233C9DB8' stroke-width='2' stroke-dasharray='10 5'/%3E%3Ccircle cx='60' cy='60' r='30' fill='none' stroke='%233C9DB8' stroke-width='1'/%3E%3C/svg%3E" class="artistic-shape shape-2" alt="">
+    <img src="data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Crect x='20' y='20' width='60' height='60' fill='none' stroke='%23110F0D' stroke-width='2' transform='rotate(45 50 50)'/%3E%3Crect x='30' y='30' width='40' height='40' fill='none' stroke='%23110F0D' stroke-width='1' transform='rotate(45 50 50)'/%3E%3C/svg%3E" class="artistic-shape shape-3" alt="">
 
-    <nav class="flex flex-col md:flex-row justify-between items-center mb-8 md:mb-12 z-20 relative max-w-7xl mx-auto bg-[var(--klimt-cream)] border-4 border-[var(--klimt-black)] p-4 shadow-[6px_6px_0px_var(--klimt-gold)] w-full gap-4">
-        <h1 class="text-2xl md:text-3xl lg:text-4xl font-black tracking-wider m-0 text-[var(--klimt-red)] text-center">Sruthi Korlakunta</h1>
-        <div class="flex flex-wrap justify-center gap-4 md:space-x-6 md:gap-0 text-base md:text-xl">
+    <nav class="glass-nav py-4 px-6 md:px-12 flex flex-col md:flex-row justify-between items-center mb-12">
+        <h1 class="text-3xl md:text-4xl lg:text-5xl font-serif-custom font-bold m-0 text-black tracking-tight"><a href="index.html">Sruthi Korlakunta</a></h1>
+        <div class="flex flex-wrap justify-center gap-6 mt-4 md:mt-0">
             <a href="index.html" class="link-hover active-link">Home</a>
             <a href="summary.html" class="link-hover">Summary</a>
+            <a href="resume.html" class="link-hover">Resume</a>
             <a href="blog.html" class="link-hover">Blog</a>
             <a href="contact.html" class="link-hover">Contact</a>
+            <a href="knowledgeDB/index.html" class="link-hover">Sruthi AI</a>
         </div>
     </nav>
 
-    <main class="grid grid-cols-1 lg:grid-cols-12 gap-10 max-w-7xl mx-auto z-20 relative w-full items-stretch mb-12">
+    <main class="max-w-7xl mx-auto px-6 md:px-12 w-full mb-20">
         
-        <!-- Row 1 Left: Intro (Col Span 7) -->
-        <div class="bento-box lg:col-span-7 flex flex-col xl:flex-row gap-6 items-center h-full">
-            <div class="klimt-border"></div>
-            <div class="w-full xl:w-2/5 relative shrink-0">
-                <div class="absolute inset-0 bg-[var(--klimt-red)] translate-x-3 translate-y-3"></div>
-                <img src="assets/PXL_20260312_214011309.jpg" alt="Sruthi Korlakunta" class="relative w-full aspect-square object-cover border-4 border-[var(--klimt-black)] mx-auto filter sepia-[0.3]">
-            </div>
-            <div class="w-full xl:w-3/5 flex flex-col justify-center">
-                <div class="speech-bubble speech-bubble-inner shrink-0 text-left">
-                    <span class="gemma-label">
-        <svg class="gemma-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-                <radialGradient id="face-grad" cx="40%" cy="40%" r="70%">
-                    <stop offset="0%" stop-color="#FFD1E3"/>
-                    <stop offset="60%" stop-color="#FF9EBB"/>
-                    <stop offset="100%" stop-color="#E86A92"/>
-                </radialGradient>
-                <radialGradient id="gill-grad" cx="30%" cy="30%" r="70%">
-                    <stop offset="0%" stop-color="#FF9EBB"/>
-                    <stop offset="100%" stop-color="#E86A92"/>
-                </radialGradient>
-                <radialGradient id="eye-grad" cx="40%" cy="40%" r="60%">
-                    <stop offset="0%" stop-color="#3A3A3A"/>
-                    <stop offset="100%" stop-color="#1A1A1A"/>
-                </radialGradient>
-                <filter id="drop-shadow" x="-20%" y="-20%" width="140%" height="140%">
-                    <feDropShadow dx="0" dy="4" stdDeviation="4" flood-color="#4A0E17" flood-opacity="0.3"/>
-                </filter>
-            </defs>
-            <g filter="url(#drop-shadow)">
-                <path d="M 25 35 Q 5 25 15 15 Q 25 25 30 38" fill="url(#gill-grad)" />
-                <path d="M 22 45 Q -5 45 5 30 Q 18 35 25 48" fill="url(#gill-grad)" />
-                <path d="M 25 55 Q 5 65 15 75 Q 25 65 30 52" fill="url(#gill-grad)" />
-                <path d="M 75 35 Q 95 25 85 15 Q 75 25 70 38" fill="url(#gill-grad)" />
-                <path d="M 78 45 Q 105 45 95 30 Q 82 35 75 48" fill="url(#gill-grad)" />
-                <path d="M 75 55 Q 95 65 85 75 Q 75 65 70 52" fill="url(#gill-grad)" />
-                <ellipse cx="50" cy="50" rx="35" ry="28" fill="url(#face-grad)" />
-                <ellipse cx="35" cy="46" rx="8" ry="10" fill="url(#eye-grad)" />
-                <ellipse cx="65" cy="46" rx="8" ry="10" fill="url(#eye-grad)" />
-                <circle cx="33" cy="42" r="3.5" fill="#FFFFFF" />
-                <circle cx="37" cy="48" r="1.5" fill="#FFFFFF" opacity="0.8"/>
-                <circle cx="63" cy="42" r="3.5" fill="#FFFFFF" />
-                <circle cx="67" cy="48" r="1.5" fill="#FFFFFF" opacity="0.8"/>
-                <ellipse cx="25" cy="54" rx="6" ry="4" fill="#E86A92" opacity="0.4" />
-                <ellipse cx="75" cy="54" rx="6" ry="4" fill="#E86A92" opacity="0.4" />
-                <path d="M 45 58 Q 50 64 55 58" fill="none" stroke="#A33258" stroke-width="2.5" stroke-linecap="round" />
-            </g>
-        </svg>
-            Gemma says:
-        </span>
-                    Hi, I’m Gemma. I am Sruthi's virtual assistant. I reside in the wires here. Sruthi’s a Data Engineer by day and a Philosopher-Poet by night.
-                </div>
-                <h2 class="text-4xl mb-4 text-[var(--klimt-red)]">The Matrix, but Make it Art</h2>
-                <p class="story-p leading-relaxed text-[var(--klimt-black)] mb-4 text-left">
-                    Sruthi has spent 8+ years architecting scalable data ecosystems for BMW, Audi, and VW. When she isn't elbow-deep in raw telemetry, she's wrangling AI, dissecting philosophy, and trying to make sense of the absurdity of it all. Essentially a logic-weaver with a New Yorker soul and an alarming caffeine dependency.
-                </p>
-                <div class="mt-auto pt-4 flex gap-4">
-                    <a href="summary.html" class="px-6 py-2 border-2 border-[var(--klimt-black)] text-[var(--klimt-black)] font-bold bg-[var(--klimt-gold)] hover:bg-[var(--klimt-red)] hover:text-[var(--klimt-cream)] transition-colors shadow-[3px_3px_0px_var(--klimt-black)] font-['Cinzel_Decorative'] uppercase inline-block">Inspect Her Mind</a>
-                </div>
-            </div>
-        </div>
-
-        <!-- Row 1 Right: About Me Card (Col Span 5) -->
-        <div class="card-wrapper lg:col-span-5 h-full" onclick="window.open('https://medium.com/about-me-stories/about-me-sruthi-korlakunta-a6db92a7d77a', '_blank')">
-            <div class="card-3d flex-col h-full relative overflow-hidden">
-                <!-- Image taking up full background but positioned appropriately -->
-                <div class="absolute inset-0 w-full h-full z-0">
-                    <img src="assets/IMG_20180626_210822_727.jpg" alt="About Me" class="w-full h-full object-cover" style="object-position: center 30%;">
-                    <!-- Dark gradient from bottom up -->
-                    <div class="absolute inset-0 bg-gradient-to-t from-[var(--klimt-black)] via-[var(--klimt-black)]/60 to-transparent"></div>
-                </div>
-                <div class="card-content flex-grow flex flex-col justify-end p-8 text-center relative z-10 h-full bg-transparent mt-auto">
-                    <h4 class="text-4xl mb-3 leading-tight text-[var(--klimt-cream)] font-['Cinzel_Decorative'] font-bold">About Me</h4>
-                    <p class="text-xl font-bold text-[var(--klimt-gold)] mb-4">Pacman collecting pointless dots on its way to certain death.</p>
-                    <p class="text-md text-[var(--klimt-cream)] mb-6">Dive into the existential labyrinth of Sruthi Korlakunta. An origin story wrapped in absurdism and data.</p>
-                    <span class="text-sm font-bold tracking-widest uppercase text-[var(--klimt-yellow)] hover:text-[var(--klimt-cream)] transition-colors">Read the Story →</span>
-                </div>
-            </div>
-        </div>
-
-        <!-- Row 2 Left: Pac-Man Game (Col Span 7) -->
-        <div class="bento-box lg:col-span-7 flex flex-col h-full">
-            <div class="klimt-border"></div>
-            <div class="speech-bubble speech-bubble-inner shrink-0">
-                <span class="gemma-label">
-        <svg class="gemma-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-                <radialGradient id="face-grad" cx="40%" cy="40%" r="70%">
-                    <stop offset="0%" stop-color="#FFD1E3"/>
-                    <stop offset="60%" stop-color="#FF9EBB"/>
-                    <stop offset="100%" stop-color="#E86A92"/>
-                </radialGradient>
-                <radialGradient id="gill-grad" cx="30%" cy="30%" r="70%">
-                    <stop offset="0%" stop-color="#FF9EBB"/>
-                    <stop offset="100%" stop-color="#E86A92"/>
-                </radialGradient>
-                <radialGradient id="eye-grad" cx="40%" cy="40%" r="60%">
-                    <stop offset="0%" stop-color="#3A3A3A"/>
-                    <stop offset="100%" stop-color="#1A1A1A"/>
-                </radialGradient>
-                <filter id="drop-shadow" x="-20%" y="-20%" width="140%" height="140%">
-                    <feDropShadow dx="0" dy="4" stdDeviation="4" flood-color="#4A0E17" flood-opacity="0.3"/>
-                </filter>
-            </defs>
-            <g filter="url(#drop-shadow)">
-                <path d="M 25 35 Q 5 25 15 15 Q 25 25 30 38" fill="url(#gill-grad)" />
-                <path d="M 22 45 Q -5 45 5 30 Q 18 35 25 48" fill="url(#gill-grad)" />
-                <path d="M 25 55 Q 5 65 15 75 Q 25 65 30 52" fill="url(#gill-grad)" />
-                <path d="M 75 35 Q 95 25 85 15 Q 75 25 70 38" fill="url(#gill-grad)" />
-                <path d="M 78 45 Q 105 45 95 30 Q 82 35 75 48" fill="url(#gill-grad)" />
-                <path d="M 75 55 Q 95 65 85 75 Q 75 65 70 52" fill="url(#gill-grad)" />
-                <ellipse cx="50" cy="50" rx="35" ry="28" fill="url(#face-grad)" />
-                <ellipse cx="35" cy="46" rx="8" ry="10" fill="url(#eye-grad)" />
-                <ellipse cx="65" cy="46" rx="8" ry="10" fill="url(#eye-grad)" />
-                <circle cx="33" cy="42" r="3.5" fill="#FFFFFF" />
-                <circle cx="37" cy="48" r="1.5" fill="#FFFFFF" opacity="0.8"/>
-                <circle cx="63" cy="42" r="3.5" fill="#FFFFFF" />
-                <circle cx="67" cy="48" r="1.5" fill="#FFFFFF" opacity="0.8"/>
-                <ellipse cx="25" cy="54" rx="6" ry="4" fill="#E86A92" opacity="0.4" />
-                <ellipse cx="75" cy="54" rx="6" ry="4" fill="#E86A92" opacity="0.4" />
-                <path d="M 45 58 Q 50 64 55 58" fill="none" stroke="#A33258" stroke-width="2.5" stroke-linecap="round" />
-            </g>
-        </svg>
-            Gemma says:
-        </span>
-                Sruthi thinks of herself as Pac-Man, navigating the maze of existence, collecting pointless dots on her way to certain death. Read more about her existential dread <a href="https://medium.com/about-me-stories/about-me-sruthi-korlakunta-a6db92a7d77a" style="text-decoration: underline wavy var(--klimt-black);" target="_blank" class="text-[var(--klimt-red)] hover:text-[var(--klimt-black)]">here</a>.
-            </div>
-            <h2 class="text-4xl mb-2 shrink-0 text-center text-[var(--klimt-red)]">The Great Labyrinth</h2>
-            <p class="text-xl text-center mb-6 font-bold text-[var(--klimt-black)] italic">"Chase wisdom, escape your shadow. Will you survive the maze?"</p>
+        <!-- Hero Section -->
+        <section class="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-16 items-stretch">
             
-            <div class="flex justify-center items-center mb-4">
-                <div class="bg-[var(--klimt-black)] border-2 border-[var(--klimt-gold)] px-6 py-2 shadow-[4px_4px_0px_var(--klimt-red)]">
-                    <span class="font-['Cinzel_Decorative'] text-[var(--klimt-yellow)] text-sm uppercase tracking-widest mr-2">Wisdom Collected:</span>
-                    <span id="game-score" class="font-['Cinzel_Decorative'] text-white text-3xl font-black">0</span>
+            <div class="lg:col-span-7 glass-card p-8 md:p-12 flex flex-col justify-center gsap-reveal">
+                <div class="gemma-label">
+                    <svg class="gemma-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" style="background:none; box-shadow:none; border-radius:0; color: #546E7A;">
+    <g fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M 25 50 C 25 30, 75 30, 75 50 C 75 60, 65 80, 50 80 C 35 80, 25 60, 25 50 Z" />
+        <path d="M 30 40 C 10 35, 10 75, 25 65" />
+        <path d="M 70 40 C 90 35, 90 75, 75 65" />
+        <path d="M 50 30 L 50 12" />
+        <path d="M 40 65 Q 50 73 60 65" />
+    </g>
+    <circle cx="50" cy="12" r="5" fill="currentColor" />
+    <circle cx="50" cy="60" r="5" fill="currentColor" />
+    <circle cx="38" cy="48" r="6" fill="#00E5FF" />
+    <circle cx="62" cy="48" r="6" fill="#00E5FF" />
+    <circle cx="36" cy="46" r="2" fill="#FFFFFF" />
+    <circle cx="60" cy="46" r="2" fill="#FFFFFF" />
+</svg>
+                    Gemma Assistant
+                </div>
+                <p class="text-lg text-gray-600 mb-6 italic">Hi, I’m Gemma. I am Sruthi's virtual assistant. Sruthi’s a Data Engineer by day and a Philosopher-Poet by night.</p>
+                <h2 class="text-5xl md:text-6xl lg:text-7xl font-serif-custom leading-tight mb-6 font-bold">The Matrix,<br><span class="text-cyan font-bold">but Make it Art</span></h2>
+                <p class="text-gray-700 leading-relaxed mb-8 max-w-xl">
+                    Sruthi has spent 8+ years architecting scalable data ecosystems for BMW, Audi, and VW. When she isn't elbow-deep in raw telemetry, she's wrangling AI, dissecting philosophy, and trying to make sense of the absurdity of it all.
+                </p>
+                <div>
+                    <a href="summary.html" class="btn-primary">Inspect Her Mind</a>
                 </div>
             </div>
 
-            <div class="flex justify-center w-full overflow-hidden flex-grow items-center py-4">
-                <canvas id="pacman-canvas" width="400" height="400" style="max-width: 100%; height: auto; touch-action: none;"></canvas>
-            </div>
-            <p class="text-md text-[var(--klimt-red)] mt-4 text-center font-bold font-['Cinzel_Decorative'] shrink-0">Use Arrow Keys or Swipe to Navigate.</p>
-        </div>
-
-        <!-- Row 2 Right: The Book Box (Col Span 5) -->
-        <div class="bento-box lg:col-span-5 flex flex-col h-full p-0 overflow-hidden">
-            <div class="p-8 flex flex-col h-full w-full">
-                <div class="klimt-border"></div>
-                <div class="speech-bubble speech-bubble-inner shrink-0">
-                    <span class="gemma-label">
-        <svg class="gemma-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-                <radialGradient id="face-grad" cx="40%" cy="40%" r="70%">
-                    <stop offset="0%" stop-color="#FFD1E3"/>
-                    <stop offset="60%" stop-color="#FF9EBB"/>
-                    <stop offset="100%" stop-color="#E86A92"/>
-                </radialGradient>
-                <radialGradient id="gill-grad" cx="30%" cy="30%" r="70%">
-                    <stop offset="0%" stop-color="#FF9EBB"/>
-                    <stop offset="100%" stop-color="#E86A92"/>
-                </radialGradient>
-                <radialGradient id="eye-grad" cx="40%" cy="40%" r="60%">
-                    <stop offset="0%" stop-color="#3A3A3A"/>
-                    <stop offset="100%" stop-color="#1A1A1A"/>
-                </radialGradient>
-                <filter id="drop-shadow" x="-20%" y="-20%" width="140%" height="140%">
-                    <feDropShadow dx="0" dy="4" stdDeviation="4" flood-color="#4A0E17" flood-opacity="0.3"/>
-                </filter>
-            </defs>
-            <g filter="url(#drop-shadow)">
-                <path d="M 25 35 Q 5 25 15 15 Q 25 25 30 38" fill="url(#gill-grad)" />
-                <path d="M 22 45 Q -5 45 5 30 Q 18 35 25 48" fill="url(#gill-grad)" />
-                <path d="M 25 55 Q 5 65 15 75 Q 25 65 30 52" fill="url(#gill-grad)" />
-                <path d="M 75 35 Q 95 25 85 15 Q 75 25 70 38" fill="url(#gill-grad)" />
-                <path d="M 78 45 Q 105 45 95 30 Q 82 35 75 48" fill="url(#gill-grad)" />
-                <path d="M 75 55 Q 95 65 85 75 Q 75 65 70 52" fill="url(#gill-grad)" />
-                <ellipse cx="50" cy="50" rx="35" ry="28" fill="url(#face-grad)" />
-                <ellipse cx="35" cy="46" rx="8" ry="10" fill="url(#eye-grad)" />
-                <ellipse cx="65" cy="46" rx="8" ry="10" fill="url(#eye-grad)" />
-                <circle cx="33" cy="42" r="3.5" fill="#FFFFFF" />
-                <circle cx="37" cy="48" r="1.5" fill="#FFFFFF" opacity="0.8"/>
-                <circle cx="63" cy="42" r="3.5" fill="#FFFFFF" />
-                <circle cx="67" cy="48" r="1.5" fill="#FFFFFF" opacity="0.8"/>
-                <ellipse cx="25" cy="54" rx="6" ry="4" fill="#E86A92" opacity="0.4" />
-                <ellipse cx="75" cy="54" rx="6" ry="4" fill="#E86A92" opacity="0.4" />
-                <path d="M 45 58 Q 50 64 55 58" fill="none" stroke="#A33258" stroke-width="2.5" stroke-linecap="round" />
-            </g>
-        </svg>
-            Gemma says:
-        </span>
-                    She wrote a book. It’s highly practical and ruthlessly insightful. No toxic positivity allowed.
+            <div class="lg:col-span-5 image-parallax-container gsap-reveal h-[400px] lg:h-auto relative group" onclick="window.open('https://medium.com/about-me-stories/about-me-sruthi-korlakunta-a6db92a7d77a', '_blank')">
+                <img src="assets/PXL_20260312_214011309.jpg" alt="Sruthi Korlakunta" class="image-parallax parallax-img object-cover w-full h-full transition-transform duration-700 group-hover:scale-105">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex flex-col justify-end p-8 text-white">
+                    <h3 class="text-3xl font-serif-custom mb-2 font-bold">About Me</h3>
+                    <p class="text-white/80 text-sm mb-4">An origin story wrapped in absurdism and data.</p>
+                    <span class="text-xs uppercase tracking-widest text-cyan font-semibold">Read the Story &rarr;</span>
                 </div>
-                <div class="flex-grow flex flex-col justify-center items-center relative overflow-hidden bg-[var(--klimt-black)] border-4 border-[var(--klimt-red)] p-6 text-center group w-full">
-                    <img src="assets/book_cover.png" alt="The Love Habit" class="absolute inset-0 w-full h-full object-cover opacity-30 mix-blend-luminosity group-hover:opacity-50 transition-opacity">
-                    <div class="relative z-10 text-[var(--klimt-cream)]">
-                        <h3 class="leading-none text-[var(--klimt-gold)] text-4xl mb-4">The Love Habit</h3>
-                        <p class="italic text-xl mb-8 text-[var(--klimt-cream)] font-serif">A practical philosophy</p>
-                        <a href="https://www.amazon.com/" target="_blank" class="inline-block bg-[var(--klimt-red)] text-[var(--klimt-cream)] px-6 py-3 uppercase tracking-widest text-sm hover:bg-[var(--klimt-gold)] hover:text-[var(--klimt-black)] transition-colors border-2 border-[var(--klimt-cream)] font-bold font-['Cinzel_Decorative']">Read on Amazon</a>
+            </div>
+            
+        </section>
+
+        <!-- Secondary Section -->
+        <section class="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-16 items-stretch">
+            
+            <div class="lg:col-span-8 glass-card p-8 flex flex-col justify-between gsap-reveal">
+                <div class="flex flex-col md:flex-row gap-8 items-center h-full">
+                    <div class="flex-1">
+                        <div class="gemma-label">
+                            <svg class="gemma-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" style="background:none; box-shadow:none; border-radius:0; color: #546E7A;">
+    <g fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M 25 50 C 25 30, 75 30, 75 50 C 75 60, 65 80, 50 80 C 35 80, 25 60, 25 50 Z" />
+        <path d="M 30 40 C 10 35, 10 75, 25 65" />
+        <path d="M 70 40 C 90 35, 90 75, 75 65" />
+        <path d="M 50 30 L 50 12" />
+        <path d="M 40 65 Q 50 73 60 65" />
+    </g>
+    <circle cx="50" cy="12" r="5" fill="currentColor" />
+    <circle cx="50" cy="60" r="5" fill="currentColor" />
+    <circle cx="38" cy="48" r="6" fill="#00E5FF" />
+    <circle cx="62" cy="48" r="6" fill="#00E5FF" />
+    <circle cx="36" cy="46" r="2" fill="#FFFFFF" />
+    <circle cx="60" cy="46" r="2" fill="#FFFFFF" />
+</svg>
+                            Gemma Says
+                        </div>
+                        <h2 class="text-4xl font-serif-custom mb-4 font-bold">The Great Labyrinth</h2>
+                        <p class="text-gray-700 mb-6 italic">"Chase wisdom, escape your shadow. Will you survive the maze?"</p>
+                        <p class="text-sm text-gray-500 mb-4">Sruthi thinks of herself as Pac-Man, navigating the maze of existence, collecting pointless dots on her way to certain death.</p>
+                        <div class="inline-block bg-white/50 px-4 py-2 rounded-full backdrop-blur-sm border border-white/50 mb-4">
+                            <span class="text-xs uppercase tracking-widest text-gray-500 mr-2">Wisdom Collected:</span>
+                            <span id="game-score" class="font-bold text-rust text-lg">0</span>
+                        </div>
+                        <p class="text-xs text-cyan uppercase tracking-wider font-semibold">Use Arrow Keys or Swipe</p>
+                    </div>
+                    <div class="flex-1 w-full flex justify-center">
+                        <canvas id="pacman-canvas" width="300" height="300" class="max-w-full shadow-inner"></canvas>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <!-- Row 3: Chronicles (Spans col 8 to 12 directly under the book and about me box) -->
-        <div class="hidden lg:block lg:col-span-7"></div>
-        <div class="bento-box lg:col-span-5 flex flex-col h-full">
-            <div class="klimt-border"></div>
-            <div class="speech-bubble speech-bubble-inner shrink-0">
-                <span class="gemma-label">
-        <svg class="gemma-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-                <radialGradient id="face-grad" cx="40%" cy="40%" r="70%">
-                    <stop offset="0%" stop-color="#FFD1E3"/>
-                    <stop offset="60%" stop-color="#FF9EBB"/>
-                    <stop offset="100%" stop-color="#E86A92"/>
-                </radialGradient>
-                <radialGradient id="gill-grad" cx="30%" cy="30%" r="70%">
-                    <stop offset="0%" stop-color="#FF9EBB"/>
-                    <stop offset="100%" stop-color="#E86A92"/>
-                </radialGradient>
-                <radialGradient id="eye-grad" cx="40%" cy="40%" r="60%">
-                    <stop offset="0%" stop-color="#3A3A3A"/>
-                    <stop offset="100%" stop-color="#1A1A1A"/>
-                </radialGradient>
-                <filter id="drop-shadow" x="-20%" y="-20%" width="140%" height="140%">
-                    <feDropShadow dx="0" dy="4" stdDeviation="4" flood-color="#4A0E17" flood-opacity="0.3"/>
-                </filter>
-            </defs>
-            <g filter="url(#drop-shadow)">
-                <path d="M 25 35 Q 5 25 15 15 Q 25 25 30 38" fill="url(#gill-grad)" />
-                <path d="M 22 45 Q -5 45 5 30 Q 18 35 25 48" fill="url(#gill-grad)" />
-                <path d="M 25 55 Q 5 65 15 75 Q 25 65 30 52" fill="url(#gill-grad)" />
-                <path d="M 75 35 Q 95 25 85 15 Q 75 25 70 38" fill="url(#gill-grad)" />
-                <path d="M 78 45 Q 105 45 95 30 Q 82 35 75 48" fill="url(#gill-grad)" />
-                <path d="M 75 55 Q 95 65 85 75 Q 75 65 70 52" fill="url(#gill-grad)" />
-                <ellipse cx="50" cy="50" rx="35" ry="28" fill="url(#face-grad)" />
-                <ellipse cx="35" cy="46" rx="8" ry="10" fill="url(#eye-grad)" />
-                <ellipse cx="65" cy="46" rx="8" ry="10" fill="url(#eye-grad)" />
-                <circle cx="33" cy="42" r="3.5" fill="#FFFFFF" />
-                <circle cx="37" cy="48" r="1.5" fill="#FFFFFF" opacity="0.8"/>
-                <circle cx="63" cy="42" r="3.5" fill="#FFFFFF" />
-                <circle cx="67" cy="48" r="1.5" fill="#FFFFFF" opacity="0.8"/>
-                <ellipse cx="25" cy="54" rx="6" ry="4" fill="#E86A92" opacity="0.4" />
-                <ellipse cx="75" cy="54" rx="6" ry="4" fill="#E86A92" opacity="0.4" />
-                <path d="M 45 58 Q 50 64 55 58" fill="none" stroke="#A33258" stroke-width="2.5" stroke-linecap="round" />
-            </g>
-        </svg>
-            Gemma says:
-        </span>
-                Here are a few of her latest mind-spills. She writes about tech, life, and chia seeds. Don't ask.
+            <div class="lg:col-span-4 glass-card p-8 flex flex-col justify-center text-center gsap-reveal group cursor-pointer relative overflow-hidden" onclick="window.open('https://www.amazon.com/', '_blank')">
+                <div class="absolute inset-0 z-0 opacity-20 transition-opacity duration-500 group-hover:opacity-40">
+                    <img src="assets/book_cover.png" alt="The Love Habit" class="w-full h-full object-cover grayscale mix-blend-multiply">
+                </div>
+                <div class="relative z-10 flex flex-col items-center">
+                    <div class="gemma-label justify-center">
+                        <svg class="gemma-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" style="background:none; box-shadow:none; border-radius:0; color: #546E7A;">
+    <g fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M 25 50 C 25 30, 75 30, 75 50 C 75 60, 65 80, 50 80 C 35 80, 25 60, 25 50 Z" />
+        <path d="M 30 40 C 10 35, 10 75, 25 65" />
+        <path d="M 70 40 C 90 35, 90 75, 75 65" />
+        <path d="M 50 30 L 50 12" />
+        <path d="M 40 65 Q 50 73 60 65" />
+    </g>
+    <circle cx="50" cy="12" r="5" fill="currentColor" />
+    <circle cx="50" cy="60" r="5" fill="currentColor" />
+    <circle cx="38" cy="48" r="6" fill="#00E5FF" />
+    <circle cx="62" cy="48" r="6" fill="#00E5FF" />
+    <circle cx="36" cy="46" r="2" fill="#FFFFFF" />
+    <circle cx="60" cy="46" r="2" fill="#FFFFFF" />
+</svg>
+                        Authored
+                    </div>
+                    <h3 class="text-4xl font-serif-custom text-rust mb-2 font-bold">The Love Habit</h3>
+                    <p class="italic text-gray-600 mb-6 font-serif-custom text-xl">A practical philosophy</p>
+                    <p class="text-sm text-gray-700 mb-8">Highly practical and ruthlessly insightful. No toxic positivity allowed.</p>
+                    <span class="btn-primary !px-6 !py-2 !text-xs">Read on Amazon</span>
+                </div>
             </div>
-            <h2 class="text-3xl mb-6 shrink-0 text-center">The Chronicles</h2>
-            <ul class="space-y-6 flex-grow flex flex-col justify-center px-4">
-                <li class="border-b-2 border-[var(--klimt-black)] pb-4 border-dashed">
-                    <a href="https://medium.com/in-fitness-and-in-health/the-unsung-heroes-of-glass-skin-routines-0a606324b039" target="_blank" class="block group">
-                        <h4 class="text-2xl font-bold text-[var(--klimt-black)] group-hover:text-[var(--klimt-red)] transition-colors font-['Cinzel_Decorative']">The Unsung Heroes of Glass Skin Routines</h4>
-                        <p class="mt-2 text-[var(--klimt-black)]">The biggest factors are those they never talk about</p>
-                    </a>
-                </li>
-                <li class="border-b-2 border-[var(--klimt-black)] pb-4 border-dashed">
-                    <a href="https://sruthikorlakunta.medium.com/python-diy-building-a-custom-chatbot-using-the-claudeapi-a6ece3fdf6e5" target="_blank" class="block group">
-                        <h4 class="text-2xl font-bold text-[var(--klimt-black)] group-hover:text-[var(--klimt-red)] transition-colors font-['Cinzel_Decorative']">Python DIY: Building A Custom Chatbot using the ClaudeAPI</h4>
-                        <p class="mt-2 text-[var(--klimt-black)]">Foundational steps</p>
-                    </a>
-                </li>
-                <li class="border-b-2 border-[var(--klimt-black)] pb-4 border-dashed">
-                    <a href="https://medium.com/design-bootcamp/which-claude-model-to-use-ffc32c545786" target="_blank" class="block group">
-                        <h4 class="text-2xl font-bold text-[var(--klimt-black)] group-hover:text-[var(--klimt-red)] transition-colors font-['Cinzel_Decorative']">Which Claude Model to Use?</h4>
-                        <p class="mt-2 text-[var(--klimt-black)]">Between Opus, Sonnet and Haiku</p>
-                    </a>
-                </li>
-            </ul>
-            <div class="mt-8 text-center shrink-0">
-                <a href="blog.html" class="inline-block px-8 py-3 bg-[var(--klimt-black)] text-[var(--klimt-cream)] border-2 border-[var(--klimt-red)] font-bold font-['Cinzel_Decorative'] uppercase tracking-wider hover:bg-[var(--klimt-red)] transition-colors">View All Musings</a>
+            
+        </section>
+        
+        <!-- Chronicles Teaser -->
+        <section class="glass-card p-8 md:p-12 text-center gsap-reveal max-w-4xl mx-auto">
+            <h2 class="text-4xl font-serif-custom mb-6 font-bold">Latest Mind-Spills</h2>
+            <p class="text-gray-600 mb-8 max-w-2xl mx-auto">Writing about tech, life, and chia seeds. Don't ask.</p>
+            <div class="flex flex-col gap-4 text-left max-w-2xl mx-auto mb-10">
+                <a href="https://medium.com/in-fitness-and-in-health/the-unsung-heroes-of-glass-skin-routines-0a606324b039" target="_blank" class="group flex justify-between items-center py-4 border-b border-gray-300 hover:border-cyan transition-colors">
+                    <div>
+                        <h4 class="text-xl font-serif-custom group-hover:text-cyan transition-colors font-bold">The Unsung Heroes of Glass Skin Routines</h4>
+                        <p class="text-sm text-gray-500 mt-1">The biggest factors are those they never talk about</p>
+                    </div>
+                    <span class="text-cyan opacity-0 group-hover:opacity-100 transition-opacity transform translate-x-[-10px] group-hover:translate-x-0">&rarr;</span>
+                </a>
+                <a href="https://sruthikorlakunta.medium.com/python-diy-building-a-custom-chatbot-using-the-claudeapi-a6ece3fdf6e5" target="_blank" class="group flex justify-between items-center py-4 border-b border-gray-300 hover:border-cyan transition-colors">
+                    <div>
+                        <h4 class="text-xl font-serif-custom group-hover:text-cyan transition-colors font-bold">Python DIY: Building A Custom Chatbot</h4>
+                        <p class="text-sm text-gray-500 mt-1">Using the ClaudeAPI</p>
+                    </div>
+                    <span class="text-cyan opacity-0 group-hover:opacity-100 transition-opacity transform translate-x-[-10px] group-hover:translate-x-0">&rarr;</span>
+                </a>
             </div>
-        </div>
+            <a href="blog.html" class="btn-primary">View All Musings</a>
+        </section>
+
     </main>
 
     <script>
-        // Pac-Man Game with Ghost AI
+        // GSAP Animations
+        gsap.registerPlugin(ScrollTrigger);
+        
+        gsap.utils.toArray('.gsap-reveal').forEach(element => {
+            gsap.to(element, {
+                scrollTrigger: {
+                    trigger: element,
+                    start: "top 85%",
+                },
+                opacity: 1,
+                y: 0,
+                duration: 1,
+                ease: "power3.out"
+            });
+        });
+
+        // Parallax Effect for Image
+        gsap.to(".parallax-img", {
+            yPercent: 20,
+            ease: "none",
+            scrollTrigger: {
+                trigger: ".image-parallax-container",
+                scrub: true
+            }, 
+        });
+
+        // Pac-Man Game Logic (Simplified for Modern Look)
         const canvas = document.getElementById('pacman-canvas');
         const ctx = canvas.getContext('2d');
-        const TILE_SIZE = 20;
+        const TILE_SIZE = 15;
         const ROWS = canvas.height / TILE_SIZE;
         const COLS = canvas.width / TILE_SIZE;
-        let pacman = { x: 1, y: 1, dx: 0, dy: 0, radius: 8, angle: 0 };
+        let pacman = { x: 1, y: 1, dx: 0, dy: 0, radius: 6, angle: 0 };
         let ghost = { x: 18, y: 18, dx: 0, dy: 0 };
         const map = [
             [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,1],[1,0,1,1,0,1,1,1,0,1,1,0,1,1,1,0,1,1,0,1],[1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],[1,0,1,1,0,1,0,1,1,1,1,1,1,0,1,0,1,1,0,1],[1,0,0,0,0,1,0,0,0,1,1,0,0,0,1,0,0,0,0,1],[1,1,1,1,0,1,1,1,2,1,1,2,1,1,1,0,1,1,1,1],[2,2,2,1,0,1,2,2,2,2,2,2,2,2,1,0,1,2,2,2],[1,1,1,1,0,1,2,1,1,2,2,1,1,2,1,0,1,1,1,1],[2,2,2,2,0,2,2,1,2,2,2,2,1,2,2,0,2,2,2,2],[1,1,1,1,0,1,2,1,1,1,1,1,1,2,1,0,1,1,1,1],[2,2,2,1,0,1,2,2,2,2,2,2,2,2,1,0,1,2,2,2],[1,1,1,1,0,1,2,1,1,1,1,1,1,2,1,0,1,1,1,1],[1,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,1],[1,0,1,1,0,1,1,1,0,1,1,0,1,1,1,0,1,1,0,1],[1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1],[1,1,0,1,0,1,0,1,1,1,1,1,1,0,1,0,1,0,1,1],[1,0,0,0,0,1,0,0,0,1,1,0,0,0,1,0,0,0,0,1],[1,0,1,1,1,1,1,1,0,1,1,0,1,1,1,1,1,1,0,1],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
@@ -626,32 +413,18 @@
         let score = 0;
         let gameOver = false;
         
-        let touchStartX = 0;
-        let touchStartY = 0;
-        canvas.addEventListener('touchstart', function(e) {
-            touchStartX = e.changedTouches[0].screenX;
-            touchStartY = e.changedTouches[0].screenY;
-        }, {passive: false});
-
+        let touchStartX = 0; let touchStartY = 0;
+        canvas.addEventListener('touchstart', function(e) { touchStartX = e.changedTouches[0].screenX; touchStartY = e.changedTouches[0].screenY; }, {passive: false});
         canvas.addEventListener('touchend', function(e) {
             if(gameOver) return;
-            let touchEndX = e.changedTouches[0].screenX;
-            let touchEndY = e.changedTouches[0].screenY;
-            let dx = touchEndX - touchStartX;
-            let dy = touchEndY - touchStartY;
+            let dx = e.changedTouches[0].screenX - touchStartX; let dy = e.changedTouches[0].screenY - touchStartY;
             if (Math.abs(dx) > Math.abs(dy)) {
-                if (dx > 30) { pacman.dx = 1; pacman.dy = 0; pacman.angle = 0; }
-                else if (dx < -30) { pacman.dx = -1; pacman.dy = 0; pacman.angle = Math.PI; }
+                if (dx > 30) { pacman.dx = 1; pacman.dy = 0; pacman.angle = 0; } else if (dx < -30) { pacman.dx = -1; pacman.dy = 0; pacman.angle = Math.PI; }
             } else {
-                if (dy > 30) { pacman.dx = 0; pacman.dy = 1; pacman.angle = Math.PI/2; }
-                else if (dy < -30) { pacman.dx = 0; pacman.dy = -1; pacman.angle = -Math.PI/2; }
+                if (dy > 30) { pacman.dx = 0; pacman.dy = 1; pacman.angle = Math.PI/2; } else if (dy < -30) { pacman.dx = 0; pacman.dy = -1; pacman.angle = -Math.PI/2; }
             }
         }, {passive: false});
-        
-        // Prevent scrolling when touching canvas
-        canvas.addEventListener('touchmove', function(e) {
-            e.preventDefault();
-        }, {passive: false});
+        canvas.addEventListener('touchmove', function(e) { e.preventDefault(); }, {passive: false});
         
         document.addEventListener('keydown', (e) => {
             if(gameOver) return;
@@ -661,15 +434,15 @@
             if(e.key === 'ArrowLeft') { pacman.dx = -1; pacman.dy = 0; pacman.angle = Math.PI; }
             if(e.key === 'ArrowRight') { pacman.dx = 1; pacman.dy = 0; pacman.angle = 0; }
         });
+
         function drawMap() {
             for(let r=0; r<ROWS; r++) {
                 for(let c=0; c<COLS; c++) {
                     if(map[r][c] === 1) {
-                        ctx.fillStyle = '#0F0C0C'; ctx.fillRect(c*TILE_SIZE, r*TILE_SIZE, TILE_SIZE, TILE_SIZE);
-                        ctx.strokeStyle = '#4A0E17'; ctx.lineWidth = 1; ctx.strokeRect(c*TILE_SIZE+2, r*TILE_SIZE+2, TILE_SIZE-4, TILE_SIZE-4);
-                        if((r+c)%2===0) { ctx.fillStyle = '#4A0E17'; ctx.beginPath(); ctx.arc(c*TILE_SIZE + TILE_SIZE/2, r*TILE_SIZE + TILE_SIZE/2, 2, 0, Math.PI*2); ctx.fill(); }
+                        ctx.fillStyle = 'rgba(17, 15, 13, 0.1)'; ctx.fillRect(c*TILE_SIZE, r*TILE_SIZE, TILE_SIZE, TILE_SIZE);
+                        ctx.fillStyle = 'rgba(255, 255, 255, 0.3)'; ctx.fillRect(c*TILE_SIZE+1, r*TILE_SIZE+1, TILE_SIZE-2, TILE_SIZE-2);
                     } else if(map[r][c] === 0) {
-                        ctx.fillStyle = '#4A0E17'; ctx.fillRect(c*TILE_SIZE + TILE_SIZE/2 - 2, r*TILE_SIZE + TILE_SIZE/2 - 2, 4, 4);
+                        ctx.fillStyle = '#3C9DB8'; ctx.beginPath(); ctx.arc(c*TILE_SIZE + TILE_SIZE/2, r*TILE_SIZE + TILE_SIZE/2, 2, 0, Math.PI*2); ctx.fill();
                     }
                 }
             }
@@ -677,12 +450,13 @@
         let mouthOpen = 0; let mouthDir = 0.1;
         function drawPacman() {
             ctx.save(); ctx.translate(pacman.x*TILE_SIZE + TILE_SIZE/2, pacman.y*TILE_SIZE + TILE_SIZE/2); ctx.rotate(pacman.angle);
-            ctx.fillStyle = '#D4AF37'; ctx.beginPath(); ctx.arc(0, 0, pacman.radius, mouthOpen * Math.PI, (2 - mouthOpen) * Math.PI); ctx.lineTo(0,0); ctx.fill();
-            ctx.fillStyle = '#0F0C0C'; ctx.beginPath(); ctx.arc(0, -4, 2, 0, Math.PI*2); ctx.fill(); ctx.restore();
+            ctx.fillStyle = '#965D37'; ctx.beginPath(); ctx.arc(0, 0, pacman.radius, mouthOpen * Math.PI, (2 - mouthOpen) * Math.PI); ctx.lineTo(0,0); ctx.fill();
+            ctx.restore();
             mouthOpen += mouthDir; if(mouthOpen >= 0.2 || mouthOpen <= 0) mouthDir = -mouthDir;
         }
-        function drawGhost() { ctx.font = "18px Arial"; ctx.textAlign = "center"; ctx.textBaseline = "middle"; ctx.fillText("👧🏻", ghost.x * TILE_SIZE + TILE_SIZE/2, ghost.y * TILE_SIZE + TILE_SIZE/2); }
+        function drawGhost() { ctx.font = "14px Inter"; ctx.textAlign = "center"; ctx.textBaseline = "middle"; ctx.fillText("💀", ghost.x * TILE_SIZE + TILE_SIZE/2, ghost.y * TILE_SIZE + TILE_SIZE/2); }
         let moveCounter = 0; let ghostMoveCounter = 0;
+        
         function update() {
             if(gameOver) return;
             moveCounter++;
@@ -707,47 +481,17 @@
             }
             if(pacman.x === ghost.x && pacman.y === ghost.y) gameOver = true;
         }
+
         function loop() {
-            ctx.fillStyle = '#EFE6D5'; 
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-            drawMap();
-            update();
-            drawPacman();
-            drawGhost();
-
-            // Update scoreboard
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            drawMap(); update(); drawPacman(); drawGhost();
             document.getElementById('game-score').innerText = score;
-
-            if(gameOver) { ctx.fillStyle = 'rgba(15, 12, 12, 0.8)'; ctx.fillRect(0, 0, canvas.width, canvas.height); ctx.fillStyle = '#4A0E17'; ctx.font = '30px Cinzel Decorative'; ctx.textAlign = "center"; ctx.fillText("Certain Death.", canvas.width/2, canvas.height/2); } else { requestAnimationFrame(loop); }
+            if(gameOver) { 
+                ctx.fillStyle = 'rgba(248, 244, 239, 0.8)'; ctx.fillRect(0, 0, canvas.width, canvas.height); 
+                ctx.fillStyle = '#110F0D'; ctx.font = '20px Cormorant Garamond'; ctx.textAlign = "center"; ctx.fillText("Game Over", canvas.width/2, canvas.height/2); 
+            } else { requestAnimationFrame(loop); }
         }
         loop();
-
-        // 3D Tilt Effect
-        document.querySelectorAll('.card-wrapper').forEach(wrapper => {
-            const card = wrapper.querySelector('.card-3d');
-            wrapper.addEventListener('mousemove', e => {
-                const rect = wrapper.getBoundingClientRect();
-                const x = e.clientX - rect.left; const y = e.clientY - rect.top;
-                const centerX = rect.width / 2; const centerY = rect.height / 2;
-                const rotateX = ((y - centerY) / centerY) * -5; const rotateY = ((x - centerX) / centerX) * 5;
-                card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
-                card.style.boxShadow = `${-rotateY}px ${rotateX + 10}px 0px var(--klimt-gold)`;
-            });
-            wrapper.addEventListener('mouseleave', () => {
-                card.style.transform = `rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
-                card.style.boxShadow = `6px 6px 0px var(--klimt-gold)`;
-            });
-        });
-    </script>
-
-    <script>
-        // Mobile touch support for dancers
-        document.querySelectorAll('.dancer').forEach(dancer => {
-            dancer.addEventListener('touchstart', (e) => {
-                dancer.style.zIndex = '100';
-            });
-        });
     </script>
 </body>
 </html>
