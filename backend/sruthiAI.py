@@ -62,7 +62,7 @@ def what_would_sruthi_say(user_query):
     """
     
     response = genai_client.models.generate_content(
-        model="gemini-2.5-flash",
+        model="gemini-3.0-flash",
         contents=full_prompt
     )
     return response.text
